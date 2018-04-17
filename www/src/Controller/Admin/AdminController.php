@@ -22,7 +22,7 @@ class AdminController
     public function number()
     {
         return new Response(
-            '<html><body><h1>BackOffice</h1></body></html>'
+            '<html><body><h1>BackOffice TEST</h1></body></html>'
         );
     }
 }
