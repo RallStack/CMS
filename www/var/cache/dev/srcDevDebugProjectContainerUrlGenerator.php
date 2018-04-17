@@ -18,6 +18,7 @@ class srcDevDebugProjectContainerUrlGenerator extends Symfony\Component\Routing\
         $this->logger = $logger;
         if (null === self::$declaredRoutes) {
             self::$declaredRoutes = array(
+        'app_lucky_number' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'App\\Controller\\LuckyController::number',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/lucky/number',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
     );
         }
     }

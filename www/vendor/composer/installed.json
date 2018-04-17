@@ -1021,8 +1021,8 @@
     },
     {
         "name": "symfony/dotenv",
-        "version": "v4.0.6",
-        "version_normalized": "4.0.6.0",
+        "version": "v4.0.8",
+        "version_normalized": "4.0.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/dotenv.git",
