@@ -10,11 +10,12 @@
 // src/Controller/LuckyController.php
 namespace App\Controller\Client;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
-use Symfony\Component\Routing\Annotation\Route;
-
-class ClientController
+class ClientController extends Controller
 {
 
     /**
@@ -22,9 +23,6 @@ class ClientController
      */
     public function number()
     {
-
-        return new Response(
-            '<html><body><h1>Client</h1></body></html>'
-        );
+        return $this->render('/client/base.html.twig');
     }
 }

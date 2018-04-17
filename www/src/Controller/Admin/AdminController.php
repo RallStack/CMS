@@ -9,11 +9,12 @@
 // src/Controller/LuckyController.php
 namespace App\Controller\Admin;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
-use Symfony\Component\Routing\Annotation\Route;
-
-class AdminController
+class AdminController extends Controller
 {
 
     /**
@@ -21,8 +22,6 @@ class AdminController
      */
     public function number()
     {
-        return new Response(
-            '<html><body><h1>BackOffice TEST</h1></body></html>'
-        );
+        return $this->render('/admin/base.html.twig');
     }
 }
