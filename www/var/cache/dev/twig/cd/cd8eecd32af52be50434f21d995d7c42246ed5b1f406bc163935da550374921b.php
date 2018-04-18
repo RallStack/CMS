@@ -1,6 +1,6 @@
 <?php
 
-/* /admin/base.html.twig */
+/* admin/base.html.twig */
 class __TwigTemplate_fe5084bbc8561276b0d31f519e7c2c1ac46a3a690efcad2b94bd9330bc1425e4 extends Twig_Template
 {
     private $source;
@@ -24,7 +24,7 @@ class __TwigTemplate_fe5084bbc8561276b0d31f519e7c2c1ac46a3a690efcad2b94bd9330bc1
     protected function doDisplay(array $context, array $blocks = array())
     {
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "/admin/base.html.twig"));
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "admin/base.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -41,13 +41,39 @@ class __TwigTemplate_fe5084bbc8561276b0d31f519e7c2c1ac46a3a690efcad2b94bd9330bc1
         // line 10
         echo "    </head>
     <body>
-        ";
-        // line 12
+        <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">
+            <a class=\"navbar-brand\" href=\"#\">Navbar</a>
+            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+                <span class=\"navbar-toggler-icon\"></span>
+            </button>
+            <div class=\"collapse navbar-collapse\" id=\"navbarNav\">
+                <ul class=\"navbar-nav\">
+                    <li class=\"nav-item active\">
+                        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"#\">Features</a>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"#\">Pricing</a>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link disabled\" href=\"#\">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class=\"container\">
+            ";
+        // line 36
         $this->displayBlock('body', $context, $blocks);
-        // line 16
-        echo "        ";
+        // line 37
+        echo "        </div>
+        ";
+        // line 38
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 22
+        // line 44
         echo "    </body>
 </html>
 ";
@@ -88,33 +114,29 @@ class __TwigTemplate_fe5084bbc8561276b0d31f519e7c2c1ac46a3a690efcad2b94bd9330bc1
 
     }
 
-    // line 12
+    // line 36
     public function block_body($context, array $blocks = array())
     {
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        // line 13
-        echo "            <h1>Bienvenue sur la page admin</h1>
-            <button class=\"btn btn-primary\">Hello</button>
-        ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
 
-    // line 16
+    // line 38
     public function block_javascripts($context, array $blocks = array())
     {
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 17
+        // line 39
         echo "            <script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"></script>
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"></script>
             <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"></script>
             <script src=\"";
-        // line 20
+        // line 42
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("build/js/general.js"), "html", null, true);
         echo "\"></script>
         ";
@@ -125,12 +147,12 @@ class __TwigTemplate_fe5084bbc8561276b0d31f519e7c2c1ac46a3a690efcad2b94bd9330bc1
 
     public function getTemplateName()
     {
-        return "/admin/base.html.twig";
+        return "admin/base.html.twig";
     }
 
     public function getDebugInfo()
     {
-        return array (  118 => 20,  113 => 17,  107 => 16,  98 => 13,  92 => 12,  83 => 8,  78 => 7,  72 => 6,  60 => 5,  51 => 22,  48 => 16,  46 => 12,  42 => 10,  40 => 6,  36 => 5,  30 => 1,);
+        return array (  140 => 42,  135 => 39,  129 => 38,  118 => 36,  109 => 8,  104 => 7,  98 => 6,  86 => 5,  77 => 44,  75 => 38,  72 => 37,  70 => 36,  42 => 10,  40 => 6,  36 => 5,  30 => 1,);
     }
 
     public function getSourceContext()
@@ -146,10 +168,32 @@ class __TwigTemplate_fe5084bbc8561276b0d31f519e7c2c1ac46a3a690efcad2b94bd9330bc1
         {% endblock %}
     </head>
     <body>
-        {% block body %}
-            <h1>Bienvenue sur la page admin</h1>
-            <button class=\"btn btn-primary\">Hello</button>
-        {% endblock %}
+        <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">
+            <a class=\"navbar-brand\" href=\"#\">Navbar</a>
+            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+                <span class=\"navbar-toggler-icon\"></span>
+            </button>
+            <div class=\"collapse navbar-collapse\" id=\"navbarNav\">
+                <ul class=\"navbar-nav\">
+                    <li class=\"nav-item active\">
+                        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"#\">Features</a>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"#\">Pricing</a>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link disabled\" href=\"#\">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class=\"container\">
+            {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}
             <script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"></script>
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"></script>
@@ -158,6 +202,6 @@ class __TwigTemplate_fe5084bbc8561276b0d31f519e7c2c1ac46a3a690efcad2b94bd9330bc1
         {% endblock %}
     </body>
 </html>
-", "/admin/base.html.twig", "C:\\wamp64\\www\\CS2I\\CMS\\www\\templates\\admin\\base.html.twig");
+", "admin/base.html.twig", "C:\\wamp64\\www\\CS2I\\CMS\\www\\templates\\admin\\base.html.twig");
     }
 }
