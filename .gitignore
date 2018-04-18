@@ -10,7 +10,7 @@
 /app/spool/*
 
 # Cache, session files and logs (Symfony3)
-/var/cache/*
+/www/var/cache/*
 /var/logs/*
 /var/sessions/*
 !var/cache/.gitkeep
@@ -27,7 +27,7 @@
 /bin/*
 !bin/console
 !bin/symfony_requirements
-/vendor/
+/www/vendor/
 
 # Assets and user uploads
 /web/bundles/
