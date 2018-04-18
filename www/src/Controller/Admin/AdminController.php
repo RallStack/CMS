@@ -22,6 +22,6 @@ class AdminController extends Controller
      */
     public function number()
     {
-        return $this->render('/admin/base.html.twig');
+        return $this->render('/admin/index.html.twig');
     }
 }
