@@ -1,8 +1,8 @@
 .idea
-.env
+/www/.env
 
-/app/cache/*
-/app/logs/*
+/www/app/cache/*
+/www/app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 
@@ -11,40 +11,42 @@
 
 # Cache, session files and logs (Symfony3)
 /www/var/cache/*
-/var/logs/*
-/var/sessions/*
+/www/var/logs/*
+/www/var/sessions/*
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
 
 # Parameters
-/app/config/parameters.yml
-/app/config/parameters.ini
+/www/app/config/parameters.yml
+/www/app/config/parameters.ini
 
 # Managed by Composer
-/app/bootstrap.php.cache
-/var/bootstrap.php.cache
-/bin/*
+/www/app/bootstrap.php.cache
+/www/var/bootstrap.php.cache
+/www/bin/*
 !bin/console
 !bin/symfony_requirements
 /www/vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
+/www/web/bundles/
+/www/web/uploads/
 
 # PHPUnit
-/app/phpunit.xml
-/phpunit.xml
+/www/app/phpunit.xml
+/www/phpunit.xml
 
 # Build data
-/build/
+/www/build/
 
 # Composer PHAR
-/composer.phar
+/www/composer.phar
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
 
 # Embedded web-server pid file
-/.web-server-pid
+/www/.web-server-pid
+
+/www/node_modules
