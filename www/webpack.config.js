@@ -11,8 +11,8 @@ Encore
     // .enableVersioning(Encore.isProduction())
 
     // uncomment to define the assets of the project
-    .addEntry('js/general', './assets/js/general.js')
-    .addStyleEntry('css/general', './assets/scss/general.scss')
+    .addEntry('js/custom', './assets/js/custom.js')
+    .addStyleEntry('css/custom', './assets/scss/custom.scss')
 
     // Add bootstrap 4.0.0
     .addStyleEntry('css/bootstrap4', './assets/scss/bootstrap4.scss')

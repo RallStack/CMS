@@ -1,5 +1,5 @@
 {
   "build/css/bootstrap4.css": "/build/css/bootstrap4.css",
-  "build/css/general.css": "/build/css/general.css",
-  "build/js/general.js": "/build/js/general.js"
+  "build/css/custom.css": "/build/css/custom.css",
+  "build/js/custom.js": "/build/js/custom.js"
 }
