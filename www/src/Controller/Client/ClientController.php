@@ -21,7 +21,7 @@ class ClientController extends Controller
     /**
      * @Route("/")
      */
-    public function number()
+    public function indexClient()
     {
         return $this->render('/client/base.html.twig');
     }

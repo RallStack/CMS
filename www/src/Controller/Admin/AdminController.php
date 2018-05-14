@@ -13,6 +13,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AdminController extends Controller
 {
@@ -28,7 +33,7 @@ class AdminController extends Controller
     /* Routing Section Page */
 
     /**
-     * @Route("/admin/page")
+     * @Route("/admin/page", name="page")
      */
     public function page()
     {
@@ -38,9 +43,44 @@ class AdminController extends Controller
     /**
      * @Route("/admin/page/create")
      */
-    public function pageCreate()
+    public function pageCreate(Request $request)
     {
-        return $this->render('/admin/page/pageCreate.html.twig');
+
+
+        $form = $this->createFormBuilder()
+            ->add('titre', TextType::class)
+            ->add('submit', SubmitType::class, array('label' => 'Créer Page'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $titre_value = $form->get('titre')->getData();
+
+            /*$em = $this->getDoctrine()->getManager();*/
+
+            /*$film->setTitre($titre_value);
+            $film->setRealisateurId($realisateur_value);
+            $film->setPaysId($pays_id_value);
+            $film->setAnnee($annee_value);
+            $film->setSynopsis($synopsis_value);*/
+
+            // Sauvergarde du produit
+            /*$em->persist($film);*/
+
+            // Exécution requete
+            /*$em->flush();*/
+
+            return $this->redirectToRoute('page');
+
+        }
+
+        return $this->render('/admin/page/pageCreate.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
     }
 
 
