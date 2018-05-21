@@ -15,6 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
+use App\Entity\Page;
+
 class ClientController extends Controller
 {
 
@@ -24,5 +26,41 @@ class ClientController extends Controller
     public function indexClient()
     {
         return $this->render('/client/base.html.twig');
+    }
+
+    /**
+     * @Route("/{P_namePage}", name="mvPageClient")
+     */
+    public function mvPageClient($P_namePage)
+    {
+        $recupAllPage = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['namePage' => $P_namePage]);
+
+        if (!$recupAllPage) {
+            return new Response(
+                '<html><body>Page non trouvée</body></html>'
+            );
+        }
+        else{
+
+            /* Recupération de tous les tournois ou article sous forme de tableau et transfert via render*/
+            $recupAllTournois = null;
+            $recupAllArticle = null;
+
+            $recupSpecialitePage = $recupAllPage->getSpecialitePage();
+
+            if($recupSpecialitePage =='liste_tournois'){
+                echo 'remplir var $recupAllTournois';
+            }
+            else if($recupSpecialitePage=='liste_article'){
+                echo 'remplir var $recupAllArticle';
+            }
+
+            return $this->render('/client/base.html.twig', array(
+                'page' => $recupAllPage,
+                'tournois' => $recupAllTournois,
+                'article' => $recupAllArticle
+            ));
+
+        }
     }
 }

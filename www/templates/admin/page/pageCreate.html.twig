@@ -6,18 +6,24 @@
             <h1>Créer Page</h1>
 
                 {{ form_start(form) }}
-                <div class="container col-12">
-                    <div class="row contenu_form">
-                        <div class="container col-6 label_form">
-                            {{ form_label(form.titre) }}<br><br>
+                <div class="container">
+                    <div class="row contenu_form" style="text-align: right">
+                        <div class="col-md-6 label_form">
+                            {{ form_label(form.namePage) }}<br><br>
+                            {{ form_label(form.descriptionPage) }}<br><br>
+                            {{ form_label(form.specialitePage) }}<br><br>
                         </div>
-                        <div class="container col-6 widget_form">
-                            {{ form_errors(form.titre) }}
-                            {{ form_widget(form.titre) }}<br><br>
+                        <div class="col-md-6 widget_form" style="text-align: left">
+                            {{ form_errors(form.namePage) }}
+                            {{ form_widget(form.namePage) }}<br><br>
+                            {{ form_errors(form.descriptionPage) }}
+                            {{ form_widget(form.descriptionPage) }}<br><br>
+                            {{ form_errors(form.specialitePage) }}
+                            {{ form_widget(form.specialitePage) }}<br><br>
                         </div>
                     </div>
                     <div class="row validation_form">
-                        <div class="container-fluid col-12 save_form">
+                        <div class="container-fluid col-12 save_form"  style="text-align: center">
                             {{ form_row(form.submit) }}
                         </div>
                     </div>
