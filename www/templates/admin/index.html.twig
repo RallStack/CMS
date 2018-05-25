@@ -91,7 +91,9 @@
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
                                 <li><a href="javascript:;"> Profil</a></li>
                                 <li><a href="javascript:;"> Aide</a></li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li><a href="{{ logout_path() }}"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                                {% endif %}
                             </ul>
                         </li>
                         <!-- Menu Profil -->
