@@ -4,7 +4,17 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
             <h1>Voir Page</h1>
-
+            <table id="liste_page">
+                {% for page in pages %}
+                    <tr id="row_page">
+                        <td class="col_listePage" id="col_namePage">{{ page.name_page }}</td>
+                        <td class="col_listePage" id="col_descriptionPage">{{ page.description_page }}</td>
+                        <td class="col_listePage" id="col_specialitePage">{{ page.specialite_page }}</td>
+                        {#<td class="col_listePage" id="col_edit"><a class="action" href="{{ path('film_edit', {'id_edit' : film.id }) }}"><i class="far fa-edit"></i></a></td>
+                        <td class="col_listePage" id="col_delete"><a class="action" href="{{ path('film_delete', {'id_delete' : film.id }) }}" onclick="return confirm('Un élément va être supprimé. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></td>#}
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 {% endblock %}

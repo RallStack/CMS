@@ -11,13 +11,22 @@ namespace App\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
+
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
+
+use App\Entity\Page;
 
 class AdminController extends Controller
 {
@@ -37,7 +46,11 @@ class AdminController extends Controller
      */
     public function page()
     {
-        return $this->render('/admin/page/page.html.twig');
+        $displayAllPages = $this->getDoctrine()->getRepository(Page::class)->displayAllPages();
+
+        return $this->render('/admin/page/page.html.twig', array(
+            "pages" => $displayAllPages
+        ));
     }
 
     /**
@@ -46,9 +59,12 @@ class AdminController extends Controller
     public function pageCreate(Request $request)
     {
 
+        $page = new Page();
 
-        $form = $this->createFormBuilder()
-            ->add('titre', TextType::class)
+        $form = $this->createFormBuilder($page)
+            ->add('namePage', TextType::class, array('label' => 'Nom de votre Page'))
+            ->add('descriptionPage', TextType::class, array('label' => 'Description de votre Page'))
+            ->add('specialitePage', TextType::class, array('label' => 'Specialite de votre Page'))
             ->add('submit', SubmitType::class, array('label' => 'Créer Page'))
             ->getForm();
 
@@ -57,21 +73,21 @@ class AdminController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-            $titre_value = $form->get('titre')->getData();
+            $namePage_value = $form->get('namePage')->getData();
+            $descriptionPage = $form->get('descriptionPage')->getData();
+            $specialitePage = $form->get('specialitePage')->getData();
 
-            /*$em = $this->getDoctrine()->getManager();*/
+            $insertNewPage = $this->getDoctrine()->getManager();
 
-            /*$film->setTitre($titre_value);
-            $film->setRealisateurId($realisateur_value);
-            $film->setPaysId($pays_id_value);
-            $film->setAnnee($annee_value);
-            $film->setSynopsis($synopsis_value);*/
+            $page->setNamePage($namePage_value);
+            $page->setDescriptionPage($descriptionPage);
+            $page->setSpecialitePage($specialitePage);
 
-            // Sauvergarde du produit
-            /*$em->persist($film);*/
+            // Sauvergarde de la page
+            $insertNewPage->persist($page);
 
-            // Exécution requete
-            /*$em->flush();*/
+            // Exécution requete - Insertion des données de la page en base
+            $insertNewPage->flush();
 
             return $this->redirectToRoute('page');
 
