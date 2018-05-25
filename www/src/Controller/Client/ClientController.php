@@ -25,7 +25,7 @@ class ClientController extends Controller
      */
     public function indexClient()
     {
-        return $this->render('/client/base.html.twig');
+        return $this->render('/client/accueil.html.twig');
     }
 
     /**

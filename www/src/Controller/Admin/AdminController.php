@@ -58,13 +58,21 @@ class AdminController extends Controller
      */
     public function pageCreate(Request $request)
     {
-
         $page = new Page();
 
         $form = $this->createFormBuilder($page)
             ->add('namePage', TextType::class, array('label' => 'Nom de votre Page'))
             ->add('descriptionPage', TextType::class, array('label' => 'Description de votre Page'))
-            ->add('specialitePage', TextType::class, array('label' => 'Specialite de votre Page'))
+            ->add('specialitePage', ChoiceType::class,
+                array(
+                    'label' => 'Specialite de votre Page',
+                    'choices'  =>  array(
+                        'Page tournois' => 'liste_tournois',
+                        'Page articles' => 'liste_article',
+                        'Page vierge' => 'page_vierge',
+                    )
+                )
+            )
             ->add('submit', SubmitType::class, array('label' => 'Créer Page'))
             ->getForm();
 
@@ -97,6 +105,104 @@ class AdminController extends Controller
             'form' => $form->createView(),
         ));
 
+    }
+
+    /**
+     * @Route("/admin/page/edit/{id_editPage}", name="page_edit")
+     */
+    public function pageEdit($id_editPage, Request $request)
+    {
+
+        // you can fetch the EntityManager via $this->getDoctrine()
+        $em = $this->getDoctrine()->getManager();
+        $page = $em->getRepository(Page::class)->findOneBy(['id' => $id_editPage]);
+
+        if (!$page) {
+            throw $this->createNotFoundException(
+                'Pas de page trouvée'
+            );
+        }
+        $getActualIdPage = $page->getId();
+        $getActualNamePage = $page->getNamePage();
+        $getActualDescriptionPage = $page->getDescriptionPage();
+        $getActualSpecialitePage = $page->getSpecialitePage();
+
+
+        $form = $this->createFormBuilder($page)
+            ->add('namePage', TextType::class, array('label' => 'Nom de votre Page'))
+            ->add('descriptionPage', TextType::class, array('label' => 'Description de votre Page'))
+            ->add('specialitePage', ChoiceType::class,
+                array(
+                    'label' => 'Specialite de votre Page',
+                    'choices'  =>  array(
+                        'Page tournois' => 'liste_tournois',
+                        'Page articles' => 'liste_article',
+                        'Page vierge' => 'page_vierge',
+                    )
+                )
+            )
+            ->add('submit', SubmitType::class, array('label' => 'Modifier Page'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $form_namePage = $form->get('namePage')->getData();
+            $form_descriptionPage = $form->get('descriptionPage')->getData();
+            $form_specialitePage = $form->get('specialitePage')->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $page->setNamePage($form_namePage);
+            $page->setDescriptionPage($form_descriptionPage);
+            $page->setSpecialitePage($form_specialitePage);
+
+            // Sauvergarde du produit
+            $em->persist($page);
+
+            // Exécution requete
+            $em->flush();
+
+            $displayAllPages = $this->getDoctrine()->getRepository(Page::class)->displayAllPages();
+            // just setup a fresh $task object (remove the dummy data)
+            return $this->render('/admin/page/page.html.twig', array(
+                "pages" => $displayAllPages
+            ));
+        }
+
+        return $this->render('/admin/page/pageEdit.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/admin/page/delete/{id_deletePage}", name="page_delete")
+     */
+    public function pageDelete($id_deletePage, Request $request)
+    {
+        // you can fetch the EntityManager via $this->getDoctrine()
+
+        $em = $this->getDoctrine()->getManager();
+        $recupPageDelete = $em->getRepository(Page::class)->findOneBy(['id' => $id_deletePage]);
+
+        if (!$recupPageDelete) {
+            throw $this->createNotFoundException(
+                'Pas de page trouvée'
+            );
+        }
+
+        $em->remove($recupPageDelete);
+        $em->flush();
+
+        $displayAllPages = $this->getDoctrine()->getRepository(Page::class)->displayAllPages();
+
+        return $this->render('/admin/page/page.html.twig', array(
+            "pages" => $displayAllPages
+        ));
     }
 
 
