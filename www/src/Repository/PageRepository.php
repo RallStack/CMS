@@ -27,7 +27,7 @@ class PageRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $querySelectAllPage = '
-            SELECT id, name_page, specialite_page, IF(LENGTH(description_page) < 150, description_page, CONCAT(SUBSTR(description_page,1, 40), " ...")) as description_page FROM page
+            SELECT id, name_page, specialite_page, description_page FROM page
             ';
         $reqSelectAllPage = $conn->prepare($querySelectAllPage);
         $reqSelectAllPage->execute();
