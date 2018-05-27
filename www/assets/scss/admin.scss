@@ -7,4 +7,29 @@ $bg : #eeeeee;
   padding: 5px;
 }
 
+.row-eq-height{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+}
 
+[name="form"]{
+  margin-top: 5%;
+}
+
+[for="form_descriptionPage"]{
+  display: flex;
+  justify-content: center;
+}
+.align_left{
+  text-align: left;
+}
+
+[name="form[submit]"]{
+  margin-top: 5%;
+  margin-left: 50%;
+  width: 20%;
+  height: 50px;
+}
