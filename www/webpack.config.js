@@ -19,6 +19,7 @@ Encore
 
     .addStyleEntry('css/general', './assets/scss/general.scss')
     .addStyleEntry('css/admin', './assets/scss/admin.scss')
+    .addStyleEntry('css/client', './assets/scss/client.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()

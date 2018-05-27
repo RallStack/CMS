@@ -1,0 +1,28 @@
+{% extends 'client/base.html.twig' %}
+
+{% block title %}client{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur la page {{ page.namePage }}</h1>
+
+    <p>
+        {% if page.specialitePage is defined %}
+            <span style="font-weight: bold">Specialité page: </span>
+            {{ page.specialitePage }}
+        {% endif %}
+    <p/>
+
+    <p>
+        {% if page.descriptionPage is defined %}
+            <span style="font-weight: bold">Description page: </span>
+            {{ page.descriptionPage |raw}}
+        {% endif %}
+    </p>
+
+    <p>
+        {% if page.specialitePage == 'liste_article' or page.specialitePage == 'liste_tournois'%}
+            <span style="font-weight: bold">Affiche la liste: </span>
+        {% endif %}
+    </p>
+    {% block javascripts %}{% endblock %}
+{% endblock %}

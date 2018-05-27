@@ -55,7 +55,7 @@ class ClientController extends Controller
                 echo 'remplir var $recupAllArticle';
             }
 
-            return $this->render('/client/base.html.twig', array(
+            return $this->render('/client/page.html.twig', array(
                 'page' => $recupAllPage,
                 'tournois' => $recupAllTournois,
                 'article' => $recupAllArticle
