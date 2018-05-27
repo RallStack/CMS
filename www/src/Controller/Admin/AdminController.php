@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
 use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -62,7 +63,7 @@ class AdminController extends Controller
 
         $form = $this->createFormBuilder($page)
             ->add('namePage', TextType::class, array('label' => 'Nom de votre Page'))
-            ->add('descriptionPage', TextType::class, array('label' => 'Description de votre Page'))
+            ->add('descriptionPage', TextareaType::class, array('attr' => array('class' => 'ckeditor')))
             ->add('specialitePage', ChoiceType::class,
                 array(
                     'label' => 'Specialite de votre Page',

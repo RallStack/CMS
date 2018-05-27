@@ -1,23 +1,30 @@
 {% extends 'admin/index.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href={{ asset("build/css/admin.css" )}}>
+{% endblock %}
+
 {% block contenu %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
             <h1>Liste des Pages</h1>
             <table class="table_liste" id="liste_page">
+                <div class="row-eq-height">
                 {% for page in pages %}
-                    <div id="row">
-                        <div class="col-md-2 col_listePage" id="col_namePage">{{ page.name_page }}</div>
-                        <div class="col-md-6 col_listePage" id="col_descriptionPage">{{ page.description_page }}</div>
-                        <div class="col-md-2 col_listePage" id="col_specialitePage">{{ page.specialite_page }}</div>
-                        <div class="col-md-1 col_listePage" id="col_editPage"><a class="action" href="{{ path('page_edit', {'id_editPage' : page.id }) }}"><i class="far fa-edit"></i></a></div>
-                        <div class="col-md-1 col_listePage" id="col_deletePage"><a class="action" href="{{ path('page_delete', {'id_deletePage' : page.id }) }}" onclick="return confirm('Un élément va être supprimé. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></div>
+
+                        <div class="col-xs-2 col_listePage" id="col_namePage">{{ page.name_page }}</div>
+                        <div class="col-xs-6 col_listePage" id="col_descriptionPage">{{ page.description_page }}</div>
+                        <div class="col-xs-2 col_listePage" id="col_specialitePage">{{ page.specialite_page }}</div>
+                        <div class="col-xs-1 col_listePage" id="col_editPage"><a class="action" href="{{ path('page_edit', {'id_editPage' : page.id }) }}"><i class="far fa-edit"></i></a></div>
+                        <div class="col-xs-1 col_listePage" id="col_deletePage"><a class="action" href="{{ path('page_delete', {'id_deletePage' : page.id }) }}" onclick="return confirm('Un élément va être supprimé. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></div>
                         {# Redirection edit and delete
                             {{ path('page_edit', {'id_edit' : page.id }) }}
                             {{ path('page_delete', {'id_delete' : page.id }) }}
                         #}
-                    </div>
+
                 {% endfor %}
+                </div>
             </table>
         </div>
     </div>

@@ -18,14 +18,7 @@
         <p>
             {% if page.descriptionPage is defined %}
                 <span style="font-weight: bold">Description page: </span>
-                {{ page.descriptionPage }}
-            {% endif %}
-        </p>
-
-        <p>
-            {% if page.contenuPage is defined %}
-                <span style="font-weight: bold">Contenu page: </span>
-                {{ page.contenuPage }}
+                {{ page.descriptionPage |raw}}
             {% endif %}
         </p>
 
