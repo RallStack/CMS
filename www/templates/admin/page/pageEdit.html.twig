@@ -1,5 +1,10 @@
 {% extends 'admin/index.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href={{ asset("build/css/admin.css" )}}>
+{% endblock %}
+
 {% block contenu %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
@@ -8,18 +13,21 @@
                 {{ form_start(form) }}
                 <div class="container">
                     <div class="row contenu_form" style="text-align: right">
-                        <div class="col-md-6 label_form">
-                            {{ form_label(form.namePage) }}<br><br>
-                            {{ form_label(form.descriptionPage) }}<br><br>
-                            {{ form_label(form.specialitePage) }}<br><br>
-                        </div>
-                        <div class="col-md-6 widget_form" style="text-align: left">
+                        <div class="col-md-2 align_left">
+                            {{ form_label(form.namePage) }}
                             {{ form_errors(form.namePage) }}
                             {{ form_widget(form.namePage) }}<br><br>
-                            {{ form_errors(form.descriptionPage) }}
-                            {{ form_widget(form.descriptionPage) }}<br><br>
+
+                            {{ form_label(form.specialitePage) }}
                             {{ form_errors(form.specialitePage) }}
-                            {{ form_widget(form.specialitePage) }}<br><br>
+                            {{ form_widget(form.specialitePage) }}
+                        </div>
+                        <div class="col-md-10 widget_form" style="text-align: left">
+                            <div class="test" id="container">
+                                {{ form_label(form.descriptionPage) }}
+                                {{ form_errors(form.descriptionPage) }}
+                                {{ form_widget(form.descriptionPage |raw) }}
+                            </div>
                         </div>
                     </div>
                     <div class="row validation_form">

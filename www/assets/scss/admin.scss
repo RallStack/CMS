@@ -1,6 +1,18 @@
 $bg : #eeeeee;
 
+.titreCol{
+  background-color: #5A738E;
+  color: white;
+}
+
 .col_listePage {
+  text-align: center;
+  border: double 1px black;
+  outline: solid 1px black;
+  padding: 5px;
+}
+
+.col_listeArticle {
   text-align: center;
   border: double 1px black;
   outline: solid 1px black;
