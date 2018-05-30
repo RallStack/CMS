@@ -1,0 +1,84 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block contenu %}
+    <div class="col-lg-2">
+        <div id="sidebar-add-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+                <ul class="nav side-add-menu" style="">
+                    <li class="dropdown">
+                        <a> <i class="fa fa-home"></i> Pages <span class="fa fa-chevron-down navbar-right"></span> </a>
+                        <ul class="nav child_menu">
+                            <div class="x_panel tile overflow_hidden">
+                                {% for page in pages %}
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="{{ page.name_page|raw }}"> {{ page.name_page|raw }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button type="button" class="btn btn-default btn-sm" onclick="addNewMenuElement();">Ajouter</button>
+                        </ul>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-edit"></i> Articles <span class="fa fa-chevron-down navbar-right"></span></a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-desktop"></i> Tournois <span class="fa fa-chevron-down navbar-right"></span></a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-table"></i> Personalisé <span class="fa fa-chevron-down navbar-right"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <div class="x_panel tile overflow_hidden" style="min-height: 320px">
+            <div class="x_title">
+                <h2>Menu</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <ul class="nav done-add-menu">
+
+                </ul>
+            </div>
+        </div>
+        <div class="form-menu">
+        {{ form_start(form, { 'attr': {'id' : 'form'} }) }}
+            {{ form_widget(form.meta_value, { 'attr': {'style' : 'display: none;'} }) }}
+            {{ form_row(form.submit, { 'attr': {'class': 'btn btn-success', 'style' : 'float: right;'} }) }}
+        {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        function addNewMenuElement() {
+            $( "input:checked" ).each(function() {
+                $( ".done-add-menu" ).append( "<li><a href='" + $(this).val() + "'>" + $(this).val() + "<span class=\"fa fa-chevron-down navbar-right\"></span> </a></li>" );
+            });
+        }
+
+        $('#form').submit(function() {
+            var menu = $('.done-add-menu').html();
+            $('#form_meta_value').val(menu);
+            return true;
+        });
+    </script>
+{% endblock %}

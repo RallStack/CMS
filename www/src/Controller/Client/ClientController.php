@@ -10,6 +10,7 @@
 // src/Controller/LuckyController.php
 namespace App\Controller\Client;
 
+use App\Entity\Theme;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,5 +63,14 @@ class ClientController extends Controller
             ));
 
         }
+    }
+
+    public function renderNavbar()
+    {
+        $navbar = $this->getDoctrine()->getRepository(Theme::class)->getNavBar();
+
+        return new Response(
+            $navbar
+        );
     }
 }

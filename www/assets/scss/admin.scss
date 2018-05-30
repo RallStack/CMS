@@ -45,3 +45,51 @@ $bg : #eeeeee;
   width: 20%;
   height: 50px;
 }
+
+.side-add-menu > li {
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  background-color: #ffffff;
+  border-right: 1px solid #E6E9ED;
+  border-top: 1px solid #E6E9ED;
+  border-left: 1px solid #E6E9ED;
+}
+
+.side-add-menu > li:last-child {
+  background-color: #ffffff;
+  border-bottom: 1px solid #E6E9ED;
+}
+
+.side-add-menu > li .child_menu .x_panel {
+  margin-bottom: 0px;
+}
+
+.side-add-menu > li .child_menu .btn {
+  float: right;
+  margin-right: 10px;
+}
+
+.done-add-menu > li {
+  margin-bottom: 10px;
+
+  background-color: #f3f3f3;
+  border: 1px solid #E6E9ED;
+
+  width: 60%;
+}
+
+.done-add-menu > li > a {
+  pointer-events: none !important;
+}
+
+.form-menu [name="form"]{
+  margin: 0px;
+}
+
+.form-menu [name="form[submit]"]{
+  margin: 0px;
+  width: auto;
+  height: auto;
+}
