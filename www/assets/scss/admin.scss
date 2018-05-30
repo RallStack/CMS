@@ -93,3 +93,7 @@ $bg : #eeeeee;
   width: auto;
   height: auto;
 }
+
+.clearfix:after {
+  content: "";
+}
