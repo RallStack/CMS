@@ -40,29 +40,29 @@
     </head>
     <body class="nav-md">
         <div class="container body">
-            <div class="main_container">
-                <!-- top navigation -->
-                <div><!--class="top_nav"-->
-                    <div class="nav_menu">
-                        <nav>
 
-                            <h1 class="logo">
-                                <a title="Dashboard" href="/">
-                                    <img src="{{ asset('images/test-logo.png') }}">
+            <!-- top navigation -->
+            <div class="nav_menu">
+                <nav>
 
-                                    <span class="logo-text hidden-xs">
+                    <h1 class="logo">
+                        <a title="Dashboard" href="/">
+                            <img src="{{ asset('images/test-logo.png') }}">
+
+                            <span class="logo-text hidden-xs">
                                         Name
                                     </span>
-                                </a>
-                            </h1>
+                        </a>
+                    </h1>
 
-                            <ul class="nav navbar-nav navbar-right">
-                                {{ render(controller( 'App\\Controller\\Client\\ClientController::renderNavbar')) }}
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <!-- /top navigation -->
+                    <ul class="nav navbar-nav navbar-right">
+                        {{ render(controller( 'App\\Controller\\Client\\ClientController::renderNavbar')) }}
+                    </ul>
+                </nav>
+            </div>
+            <!-- /top navigation -->
+
+            <div class="main_container">
 
                 {% block body %}{% endblock %}
 
