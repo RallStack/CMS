@@ -401,39 +401,42 @@ class AdminController extends Controller
      */
     public function menu(Request $request)
     {
-        $Pages = $this->getDoctrine()->getRepository(Page::class)->displayAllPages();
-        //$Articles = $this->getDoctrine()->getRepository(article::class)->displayAllArticles();
-        //$Turnaments = $this->getDoctrine()->getRepository(Turnament::class)->displayAllArticles();
+        $entityManager = $this->getDoctrine()->getManager();
 
-        $Theme = new Theme();
+        $Page = $entityManager->getRepository(Page::class)->displayAllPages();
+        $Article = $entityManager->getRepository(article::class)->displayAllArticles();
+        //$Turnament = $entityManager->getRepository(Turnament::class)->displayAllArticles();
+        $Theme = $entityManager->getRepository(Theme::class)->getNavBar();
+
+        if (!$Theme) {
+            $Theme = new Theme();
+        }
 
         $form = $this->createFormBuilder($Theme)
             ->add('meta_value', TextType::class, array('required' => false))
             ->add('submit', SubmitType::class, array('label' => 'Sauvegarder'))
             ->getForm();
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $value = $form->get('meta_value')->getData();
 
-            $insertNewTheme = $this->getDoctrine()->getManager();
-
             $Theme->setMetaAttribute("meta-main-menu");
             $Theme->setMetaValue($value);
 
-            $insertNewTheme->persist($Theme);
+            $entityManager->persist($Theme);
 
-            $insertNewTheme->flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('menu_index');
 
         }
 
         return $this->render('/admin/menu/index.html.twig', array(
-            "pages" => $Pages,
-            "articles" => null,
+            "pages" => $Page,
+            "articles" => $Article,
             "turnaments" => null,
+            "theme" => $Theme,
             'form' => $form->createView()
         ));
     }

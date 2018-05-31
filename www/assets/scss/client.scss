@@ -1,7 +1,8 @@
 .logo {
   float: left;
   margin: 0;
-  padding: 14px 0 14px;
+  padding: 10px 0 14px;
+  margin-left: 150px;
 }
 
 .logo a {
@@ -17,4 +18,13 @@ footer {
   bottom: 0;
   left: 0;
   text-align: center;
+}
+
+h1.logo > a > span {
+  vertical-align: middle;
+}
+
+.nav.navbar-nav {
+  margin-top: 4px;
+  margin-right: 150px;
 }

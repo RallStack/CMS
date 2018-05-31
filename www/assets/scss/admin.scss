@@ -82,6 +82,15 @@ $bg : #eeeeee;
 
 .done-add-menu > li > a {
   pointer-events: none !important;
+  display: inline-block;
+}
+
+.done-add-menu > li > span {
+  margin-top: 15px;
+  margin-right: 15px;
+  float: right;
+  cursor: pointer;
+  pointer-events: all;
 }
 
 .form-menu [name="form"]{

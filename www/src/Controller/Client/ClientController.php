@@ -70,7 +70,7 @@ class ClientController extends Controller
         $navbar = $this->getDoctrine()->getRepository(Theme::class)->getNavBar();
 
         return new Response(
-            $navbar
+            $navbar->getMetaValue()
         );
     }
 }
