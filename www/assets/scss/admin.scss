@@ -106,3 +106,8 @@ $bg : #eeeeee;
 .clearfix:after {
   content: "";
 }
+
+.panel_toolbox {
+  float: right;
+  min-width: inherit;
+}
