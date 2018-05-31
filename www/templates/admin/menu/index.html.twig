@@ -8,7 +8,7 @@
                     <li class="dropdown">
                         <a> <i class="fa fa-home"></i> Pages <span class="fa fa-chevron-down navbar-right"></span> </a>
                         <ul class="nav child_menu">
-                            <div class="x_panel tile overflow_hidden">
+                            <div id="page" class="x_panel tile overflow_hidden">
                                 {% for page in pages %}
                                     <div class="checkbox">
                                         <label>
@@ -17,13 +17,13 @@
                                     </div>
                                 {% endfor %}
                             </div>
-                            <button type="button" class="btn btn-default btn-sm" onclick="addNewMenuElement();">Ajouter</button>
+                            <button  type="button" class="btn btn-default btn-sm" onclick="addNewMenuElement('page');">Ajouter</button>
                         </ul>
                     </li>
                     <li>
                         <a><i class="fa fa-edit"></i> Articles <span class="fa fa-chevron-down navbar-right"></span></a>
                         <ul class="nav child_menu">
-                            <div class="x_panel tile overflow_hidden">
+                            <div id="article" class="x_panel tile overflow_hidden">
                                 {% for article in articles %}
                                     <div class="checkbox">
                                         <label>
@@ -32,25 +32,19 @@
                                     </div>
                                 {% endfor %}
                             </div>
-                            <button type="button" class="btn btn-default btn-sm" onclick="addNewMenuElement();">Ajouter</button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="addNewMenuElement('article');">Ajouter</button>
                         </ul>
                     </li>
-                    <li>
+                    <!--<li>
                         <a><i class="fa fa-desktop"></i> Tournois <span class="fa fa-chevron-down navbar-right"></span></a>
-                    </li>
+                    </li>-->
                     <li>
                         <a><i class="fa fa-table"></i> Personalisé <span class="fa fa-chevron-down navbar-right"></span></a>
                         <ul class="nav child_menu">
                             <div class="x_panel tile overflow_hidden">
-                                {% for article in articles %}
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="{{ article.titre_article|raw }}"> {{ article.titre_article|raw }}
-                                        </label>
-                                    </div>
-                                {% endfor %}
+                                <input id="perso" type="text" class="form-control">
                             </div>
-                            <button type="button" class="btn btn-default btn-sm" onclick="addNewMenuElement();">Ajouter</button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="addNewMenuElement('perso');">Ajouter</button>
                         </ul>
                     </li>
                 </ul>
@@ -93,10 +87,16 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        function addNewMenuElement() {
-            $( "input:checked" ).each(function() {
-                $( ".done-add-menu" ).append( "<li><a href='" + $(this).val() + "'>" + $(this).val() + "</a><span class=\"fa fa-trash delete\"></span></li>" );
-            });
+        function addNewMenuElement(type) {
+            if(type == 'perso'){
+                var url = $('#perso').val();
+                $( ".done-add-menu" ).append( "<li><a href='" + url + "'>" + url + "</a><span class=\"fa fa-trash delete\"></span></li>" );
+            }else {
+                var element = "#"+ type +" input:checked";
+                $(element).each(function() {
+                    $( ".done-add-menu" ).append( "<li><a href='" + $(this).val() + "'>" + $(this).val() + "</a><span class=\"fa fa-trash delete\"></span></li>" );
+                });
+            }
         }
 
         $('#form').submit(function() {
