@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\Page;
+use App\Entity\Article;
 
 class ClientController extends Controller
 {
@@ -52,13 +53,13 @@ class ClientController extends Controller
                 echo 'remplir var $recupAllTournois';
             }
             else if($recupSpecialitePage=='liste_article'){
-                echo 'remplir var $recupAllArticle';
+                $recupAllArticle = $this->getDoctrine()->getRepository(article::class)->displayAllArticles();
             }
 
-            return $this->render('/client/base.html.twig', array(
+            return $this->render('/client/client.html.twig', array(
                 'page' => $recupAllPage,
                 'tournois' => $recupAllTournois,
-                'article' => $recupAllArticle
+                'articles' => $recupAllArticle
             ));
 
         }

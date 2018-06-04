@@ -1,33 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            <!--<link rel="stylesheet" href="{#{{ asset('build/css/bootstrap4.css') }}#}">-->
+
+            <!-- Bootstrap -->
+            <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+
+            <!-- Font Awesome -->
+            <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+            <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+
+
+        {% endblock %}
     </head>
     <body>
-        <h1>Bienvenue sur la page {{ page.namePage }}</h1>
+        <div class="cBody">
+            {% block contenu %}
 
-        <p>
-            {% if page.specialitePage is defined %}
-                <span style="font-weight: bold">Specialité page: </span>
-                {{ page.specialitePage }}
-            {% endif %}
-        <p/>
+            {% endblock %}
+        </div>
+        {% block javascripts %}
+            <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 
-        <p>
-            {% if page.descriptionPage is defined %}
-                <span style="font-weight: bold">Description page: </span>
-                {{ page.descriptionPage |raw}}
-            {% endif %}
-        </p>
+            <!-- jQuery -->
+            <script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+            <!-- Bootstrap -->
+            <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-        <p>
-            {% if page.specialitePage == 'liste_article' or page.specialitePage == 'liste_tournois'%}
-                <span style="font-weight: bold">Affiche la liste: </span>
-            {% endif %}
-        </p>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+            <!-- FastClick -->
+
+
+
+            <script src="{{ asset('build/js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('build/js/ckeditor/adapters/jquery.js') }}" type="text/javascript"></script>
+
+            <script type="text/javascript">
+                $(function() {
+                    $('textarea.ckeditor').ckeditor();
+                });
+            </script>
+        {% endblock %}
     </body>
 </html>
