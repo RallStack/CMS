@@ -22,7 +22,7 @@ class Page
     private $namePage;
 
     /**
-     * @ORM\Column(type="string", length=3600)
+     * @ORM\Column(type="text", length=64000)
      */
     private $descriptionPage;
 

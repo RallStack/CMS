@@ -27,7 +27,7 @@ class PageRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $querySelectAllPage = '
-            SELECT * FROM Page
+            SELECT id, name_page, specialite_page, description_page FROM page
             ';
         $reqSelectAllPage = $conn->prepare($querySelectAllPage);
         $reqSelectAllPage->execute();

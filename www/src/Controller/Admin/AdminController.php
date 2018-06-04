@@ -9,6 +9,7 @@
 // src/Controller/LuckyController.php
 namespace App\Controller\Admin;
 
+use App\Entity\Theme;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -20,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
 use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -27,6 +29,7 @@ use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 
 use App\Entity\Page;
+use App\Entity\Article;
 
 class AdminController extends Controller
 {
@@ -62,7 +65,7 @@ class AdminController extends Controller
 
         $form = $this->createFormBuilder($page)
             ->add('namePage', TextType::class, array('label' => 'Nom de votre Page'))
-            ->add('descriptionPage', TextType::class, array('label' => 'Description de votre Page'))
+            ->add('descriptionPage', TextareaType::class, array('attr' => array('class' => 'ckeditor')))
             ->add('specialitePage', ChoiceType::class,
                 array(
                     'label' => 'Specialite de votre Page',
@@ -130,7 +133,7 @@ class AdminController extends Controller
 
         $form = $this->createFormBuilder($page)
             ->add('namePage', TextType::class, array('label' => 'Nom de votre Page'))
-            ->add('descriptionPage', TextType::class, array('label' => 'Description de votre Page'))
+            ->add('descriptionPage', TextareaType::class, array('attr' => array('class' => 'ckeditor')))
             ->add('specialitePage', ChoiceType::class,
                 array(
                     'label' => 'Specialite de votre Page',
@@ -206,22 +209,171 @@ class AdminController extends Controller
     }
 
 
-    /* Routing Section User */
+    /* Routing Section Article */
 
     /**
-     * @Route("/admin/article")
+     * @Route("/admin/article" , name="article")
      */
     public function article()
     {
-        return $this->render('/admin/article/article.html.twig');
+        $displayAllArticles = $this->getDoctrine()->getRepository(article::class)->displayAllArticles();
+
+        return $this->render('/admin/article/article.html.twig', array(
+            "articles" => $displayAllArticles
+        ));
     }
 
     /**
      * @Route("/admin/article/create")
      */
-    public function articleCreate()
+    public function articleCreate(Request $request)
     {
-        return $this->render('/admin/article/articleCreate.html.twig');
+        $article = new Article();
+
+        $form = $this->createFormBuilder($article)
+            ->add('titreArticle', TextType::class, array('label' => 'Nom de votre Article'))
+            ->add('auteurArticle', TextType::class, array('label' => 'Auteur votre Article'))
+            ->add('publicationArticle', ChoiceType::class,
+                array(
+                    'label' => 'Publication de votre Article',
+                    'choices'  =>  array(
+                        'Oui' => '1',
+                        'Non' => '0',
+                    )
+                )
+            )
+            ->add('contenuArticle', TextareaType::class, array('attr' => array('class' => 'ckeditor')))
+
+            ->add('submit', SubmitType::class, array('label' => 'Créer Article'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $titreArticle = $form->get('titreArticle')->getData();
+            $auteurArticle = $form->get('auteurArticle')->getData();
+            $publicationArticle = $form->get('publicationArticle')->getData();
+            $contenuArticle = $form->get('contenuArticle')->getData();
+
+            $insertNewArticle = $this->getDoctrine()->getManager();
+
+            $article->setTitreArticle($titreArticle);
+            $article->setAuteurArticle($auteurArticle);
+            $article->setDateArticle(new \DateTime(date('Y-m-d')));
+            $article->setPublicationArticle($publicationArticle);
+            $article->setContenuArticle($contenuArticle);
+
+            // Sauvergarde de la page
+            $insertNewArticle->persist($article);
+
+            // Exécution requete - Insertion des données de la page en base
+            $insertNewArticle->flush();
+
+            return $this->redirectToRoute('article');
+
+        }
+
+        return $this->render('/admin/article/articleCreate.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/article/edit/{id_editArticle}", name="article_edit")
+     */
+    public function articleEdit($id_editArticle, Request $request)
+    {
+
+        // you can fetch the EntityManager via $this->getDoctrine()
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository(Article::class)->findOneBy(['id' => $id_editArticle]);
+
+        if (!$article) {
+            throw $this->createNotFoundException(
+                'Pas d\'article trouvé'
+            );
+        }
+
+
+        $form = $this->createFormBuilder($article)
+            ->add('titreArticle', TextType::class, array('label' => 'Nom de votre Article'))
+            ->add('auteurArticle', TextType::class, array('label' => 'Auteur votre Article'))
+            ->add('publicationArticle', ChoiceType::class,
+                array(
+                    'label' => 'Publication de votre Article',
+                    'choices'  =>  array(
+                        'Oui' => '1',
+                        'Non' => '0',
+                    )
+                )
+            )
+            ->add('contenuArticle', TextareaType::class, array('attr' => array('class' => 'ckeditor')))
+
+            ->add('submit', SubmitType::class, array('label' => 'Créer Article'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $titreArticle = $form->get('titreArticle')->getData();
+            $auteurArticle = $form->get('auteurArticle')->getData();
+            $publicationArticle = $form->get('publicationArticle')->getData();
+            $contenuArticle = $form->get('contenuArticle')->getData();
+
+            $insertNewArticle = $this->getDoctrine()->getManager();
+
+            $article->setTitreArticle($titreArticle);
+            $article->setAuteurArticle($auteurArticle);
+            $article->setDateArticle(new \DateTime(date('Y-m-d')));
+            $article->setPublicationArticle($publicationArticle);
+            $article->setContenuArticle($contenuArticle);
+
+            // Sauvergarde de la page
+            $insertNewArticle->persist($article);
+
+            // Exécution requete - Insertion des données de la page en base
+            $insertNewArticle->flush();
+
+            $displayAllArticles = $this->getDoctrine()->getRepository(Article::class)->displayAllArticles();
+            // just setup a fresh $task object (remove the dummy data)
+            return $this->render('/admin/article/article.html.twig', array(
+                "articles" => $displayAllArticles
+            ));
+        }
+
+        return $this->render('/admin/article/articleEdit.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/admin/article/delete/{id_deleteArticle}", name="article_delete")
+     */
+    public function articleDelete($id_deleteArticle, Request $request)
+    {
+        // you can fetch the EntityManager via $this->getDoctrine()
+
+        $em = $this->getDoctrine()->getManager();
+        $recupArticleDelete = $em->getRepository(Article::class)->findOneBy(['id' => $id_deleteArticle]);
+
+        if (!$recupArticleDelete) {
+            throw $this->createNotFoundException(
+                'Pas d\'article trouvé'
+            );
+        }
+
+        $em->remove($recupArticleDelete);
+        $em->flush();
+
+        $displayAllArticle = $this->getDoctrine()->getRepository(Article::class)->displayAllArticles();
+
+        return $this->render('/admin/article/article.html.twig', array(
+            "articles" => $displayAllArticle
+        ));
     }
 
     /* Routing Section Tournois  */
@@ -240,6 +392,53 @@ class AdminController extends Controller
     public function tournoisCreate()
     {
         return $this->render('/admin/tournois/tournoisCreate.html.twig');
+    }
+
+    /* Routing Section Menu */
+
+    /**
+     * @Route("/admin/menu", name="menu_index")
+     */
+    public function menu(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $Page = $entityManager->getRepository(Page::class)->displayAllPages();
+        $Article = $entityManager->getRepository(article::class)->displayAllArticles();
+        //$Turnament = $entityManager->getRepository(Turnament::class)->displayAllArticles();
+        $Theme = $entityManager->getRepository(Theme::class)->getNavBar();
+
+        if (!$Theme) {
+            $Theme = new Theme();
+        }
+
+        $form = $this->createFormBuilder($Theme)
+            ->add('meta_value', TextType::class, array('required' => false))
+            ->add('submit', SubmitType::class, array('label' => 'Sauvegarder'))
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $value = $form->get('meta_value')->getData();
+
+            $Theme->setMetaAttribute("meta-main-menu");
+            $Theme->setMetaValue($value);
+
+            $entityManager->persist($Theme);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('menu_index');
+
+        }
+
+        return $this->render('/admin/menu/index.html.twig', array(
+            "pages" => $Page,
+            "articles" => $Article,
+            "turnaments" => null,
+            "theme" => $Theme,
+            'form' => $form->createView()
+        ));
     }
 
     /* Routing Section User */

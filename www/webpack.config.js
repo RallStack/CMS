@@ -17,6 +17,12 @@ Encore
     // Add bootstrap 4.0.0
     .addStyleEntry('css/bootstrap4', './assets/scss/bootstrap4.scss')
 
+    .addStyleEntry('css/general', './assets/scss/general.scss')
+    .addStyleEntry('css/admin', './assets/scss/admin.scss')
+    .addStyleEntry('css/client', './assets/scss/client.scss')
+    .addStyleEntry('css/displayContenu', './assets/scss/displayContenu.scss')
+    .addStyleEntry('css/client', './assets/scss/client.scss')
+
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()
 

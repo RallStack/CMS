@@ -1,0 +1,89 @@
+.logo {
+  float: left;
+  margin: 0;
+  padding: 10px 0 14px;
+  margin-left: 150px;
+}
+
+.logo a {
+  padding: 15px 15px 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+footer {
+  margin-left: 0px !important;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+
+h1.logo > a > span {
+  vertical-align: middle;
+}
+
+.nav.navbar-nav {
+  margin-top: 4px;
+  margin-right: 150px;
+$bgClient : #F5F5F5;
+@keyframes kfHover {
+  from {background-color: transparent}
+  to {background-color: rgba(0, 0, 0,0.5)}
+}
+@keyframes kfLeave {
+  from {background-color: rgba(0, 0, 0,0.5)}
+  to {background-color: transparent}
+}
+@keyframes btnHover {
+  from {display: none}
+  to {display: block}
+}
+@keyframes btnLeave {
+  from {display: block}
+  to {display: none}
+}
+
+.container-fluid{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+html{
+  background-color: $bgClient;
+
+  .cBody{
+    background-color: $bgClient;
+  }
+
+  .row-eq-height{
+    .cArticle{
+      border: double 1px black;
+      outline: solid 1px black;
+      .cTitre{
+        height:50px;
+        outline: solid 1px black;
+        margin-bottom: 3%;
+      }
+      .cContenu{
+        height:200px;
+        padding-right: 15px;
+        padding-left: 15px;
+
+        span{
+          background-color: transparent !important;
+          color: black;
+        }
+      }
+      .cFooter{
+        #col_auteurarticle{
+          text-align: right;
+        }
+        #col_datearticle{
+          text-align: right;
+        }
+      }
+    }
+  }
+}
