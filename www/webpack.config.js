@@ -19,6 +19,7 @@ Encore
 
     .addStyleEntry('css/general', './assets/scss/general.scss')
     .addStyleEntry('css/admin', './assets/scss/admin.scss')
+    .addStyleEntry('css/client', './assets/scss/client.scss')
     .addStyleEntry('css/displayContenu', './assets/scss/displayContenu.scss')
     .addStyleEntry('css/client', './assets/scss/client.scss')
 
