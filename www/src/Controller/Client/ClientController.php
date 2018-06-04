@@ -57,7 +57,7 @@ class ClientController extends Controller
                 $recupAllArticle = $this->getDoctrine()->getRepository(article::class)->displayAllArticles();
             }
 
-            return $this->render('/client/client.html.twig', array(
+            //return $this->render('/client/client.html.twig', array(
             return $this->render('/client/page.html.twig', array(
                 'page' => $recupAllPage,
                 'tournois' => $recupAllTournois,
@@ -70,6 +70,10 @@ class ClientController extends Controller
     public function renderNavbar()
     {
         $navbar = $this->getDoctrine()->getRepository(Theme::class)->getNavBar();
+
+        if($navbar == null){
+            $navbar = new Theme();
+        }
 
         return new Response(
             $navbar->getMetaValue()

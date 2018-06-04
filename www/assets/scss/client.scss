@@ -27,7 +27,9 @@ h1.logo > a > span {
 .nav.navbar-nav {
   margin-top: 4px;
   margin-right: 150px;
-$bgClient : #F5F5F5;
+  $bgClient: #F5F5F5;
+}
+
 @keyframes kfHover {
   from {background-color: transparent}
   to {background-color: rgba(0, 0, 0,0.5)}
