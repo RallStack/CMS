@@ -21,6 +21,7 @@ Encore
     .addStyleEntry('css/admin', './assets/scss/admin.scss')
     .addStyleEntry('css/client', './assets/scss/client.scss')
     .addStyleEntry('css/displayContenu', './assets/scss/displayContenu.scss')
+    .addStyleEntry('css/client', './assets/scss/client.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()

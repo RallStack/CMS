@@ -10,6 +10,7 @@
 // src/Controller/LuckyController.php
 namespace App\Controller\Client;
 
+use App\Entity\Theme;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,12 +57,26 @@ class ClientController extends Controller
                 $recupAllArticle = $this->getDoctrine()->getRepository(article::class)->displayAllArticles();
             }
 
-            return $this->render('/client/client.html.twig', array(
+            //return $this->render('/client/client.html.twig', array(
+            return $this->render('/client/page.html.twig', array(
                 'page' => $recupAllPage,
                 'tournois' => $recupAllTournois,
                 'articles' => $recupAllArticle
             ));
 
         }
+    }
+
+    public function renderNavbar()
+    {
+        $navbar = $this->getDoctrine()->getRepository(Theme::class)->getNavBar();
+
+        if($navbar == null){
+            $navbar = new Theme();
+        }
+
+        return new Response(
+            $navbar->getMetaValue()
+        );
     }
 }

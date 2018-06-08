@@ -9,6 +9,7 @@
 // src/Controller/LuckyController.php
 namespace App\Controller\Admin;
 
+use App\Entity\Theme;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -391,6 +392,53 @@ class AdminController extends Controller
     public function tournoisCreate()
     {
         return $this->render('/admin/tournois/tournoisCreate.html.twig');
+    }
+
+    /* Routing Section Menu */
+
+    /**
+     * @Route("/admin/menu", name="menu_index")
+     */
+    public function menu(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $Page = $entityManager->getRepository(Page::class)->displayAllPages();
+        $Article = $entityManager->getRepository(article::class)->displayAllArticles();
+        //$Turnament = $entityManager->getRepository(Turnament::class)->displayAllArticles();
+        $Theme = $entityManager->getRepository(Theme::class)->getNavBar();
+
+        if (!$Theme) {
+            $Theme = new Theme();
+        }
+
+        $form = $this->createFormBuilder($Theme)
+            ->add('meta_value', TextType::class, array('required' => false))
+            ->add('submit', SubmitType::class, array('label' => 'Sauvegarder'))
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $value = $form->get('meta_value')->getData();
+
+            $Theme->setMetaAttribute("meta-main-menu");
+            $Theme->setMetaValue($value);
+
+            $entityManager->persist($Theme);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('menu_index');
+
+        }
+
+        return $this->render('/admin/menu/index.html.twig', array(
+            "pages" => $Page,
+            "articles" => $Article,
+            "turnaments" => null,
+            "theme" => $Theme,
+            'form' => $form->createView()
+        ));
     }
 
     /* Routing Section User */

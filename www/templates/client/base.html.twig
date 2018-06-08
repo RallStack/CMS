@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{% block title %}{% endblock %}</title>
+
+        <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <!--<link rel="stylesheet" href="{#{{ asset('build/css/bootstrap4.css') }}#}">-->
+            <!--<link rel="stylesheet" href="{{ asset('build/css/bootstrap4.css') }}">-->
 
             <!-- Bootstrap -->
             <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -15,36 +18,114 @@
             <!-- Font Awesome -->
             <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
             <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+            <!-- NProgress -->
+            <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+            <!-- iCheck -->
+            <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
+            <!-- bootstrap-progressbar -->
+            <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+            <!-- JQVMap -->
+            <link href="{{ asset('vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
+            <!-- bootstrap-daterangepicker -->
+            <link href="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+
+            <!-- Custom Theme Style -->
+            <link rel="stylesheet" href="{{ asset('build/css/custom.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('build/css/client.css') }}">
+
         {% endblock %}
     </head>
-    <body>
-        <div class="cBody">
-            {% block contenu %}
+    <body class="nav-md">
+        <div class="container body">
 
-            {% endblock %}
+            <!-- top navigation -->
+            <div class="nav_menu">
+                <nav>
+                    <h1 class="logo">
+                        <a title="Dashboard" href="/">
+                            <img src="{{ asset('images/test-logo.png') }}">
+
+                            <span class="logo-text hidden-xs">
+                                        Name
+                                    </span>
+                        </a>
+                    </h1>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        {{ render(controller( 'App\\Controller\\Client\\ClientController::renderNavbar')) }}
+                    </ul>
+                </nav>
+            </div>
+            <!-- /top navigation -->
+
+            <div class="main_container">
+                <div class="cBody">
+                    {% block contenu %}
+
+                    {% endblock %}
+                </div>
+
+                {% block body %}{% endblock %}
+
+                <!-- footer content -->
+                <footer>
+                    <div>
+                        CMS Tournament by <span data-toggle="tooltip" data-placement="top" title="" data-original-title="DUPATH">Duchemin Maxime</span> and <span data-toggle="tooltip" data-placement="top" title="" data-original-title="TITI">Curtil Guillaume</span>
+                    </div>
+                </footer>
+                <!-- /footer content -->
+            </div>
         </div>
-        {% block javascripts %}
-            <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+    {% block javascripts %}
 
-            <!-- jQuery -->
-            <script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
-            <!-- Bootstrap -->
-            <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <!-- jQuery -->
+        <script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+        <!-- Bootstrap -->
+        <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-            <!-- FastClick -->
+        <!-- FastClick -->
+        <script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+        <!-- NProgress -->
+        <script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+        <!-- Chart.js -->
+        <script src="{{ asset('vendors/Chart.js/dist/Chart.min.js') }}"></script>
+        <!-- gauge.js -->
+        <script src="{{ asset('vendors/gauge.js/dist/gauge.min.js') }}"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+        <!-- iCheck -->
+        <script src="{{ asset('vendors/iCheck/icheck.min.js') }}"></script>
 
+        <!-- Flot -->
+        <script src="{{ asset('vendors/Flot/jquery.flot.js') }}"></script>
+        <script src="{{ asset('vendors/Flot/jquery.flot.pie.js') }}"></script>
+        <script src="{{ asset('vendors/Flot/jquery.flot.time.js') }}"></script>
+        <script src="{{ asset('vendors/Flot/jquery.flot.stack.js') }}"></script>
+        <script src="{{ asset('vendors/Flot/jquery.flot.resize.js') }}"></script>
+        <!-- Flot plugins -->
+        <script src="{{ asset('vendors/flot.orderbars/js/jquery.flot.orderBars.js') }}"></script>
+        <script src="{{ asset('vendors/flot-spline/js/jquery.flot.spline.min.js') }}"></script>
+        <script src="{{ asset('vendors/flot.curvedlines/curvedLines.js') }}"></script>
+        <!-- DateJS -->
+        <script src="{{ asset('vendors/DateJS/build/date.js') }}"></script>
+        <!-- JQVMap -->
+        <script src="{{ asset('vendors/jqvmap/dist/jquery.vmap.js') }}"></script>
+        <script src="{{ asset('vendors/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+        <script src="{{ asset('vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}"></script>
+        <!-- bootstrap-daterangepicker -->
+        <script src="{{ asset('vendors/moment/min/moment.min.js') }}"></script>
+        <script src="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
+        <script src="{{ asset('build/js/custom.js') }}"></script>
 
-            <script src="{{ asset('build/js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('build/js/ckeditor/adapters/jquery.js') }}" type="text/javascript"></script>
-
-            <script type="text/javascript">
-                $(function() {
-                    $('textarea.ckeditor').ckeditor();
-                });
-            </script>
+        <script type="text/javascript">
+            $( document ).ready(function() {
+                $('.nav.navbar-nav.navbar-right > li > .delete').remove();
+            });
+        </script>
         {% endblock %}
     </body>
 </html>
