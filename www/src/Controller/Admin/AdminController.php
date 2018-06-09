@@ -405,7 +405,7 @@ class AdminController extends Controller
 
         $Page = $entityManager->getRepository(Page::class)->displayAllPages();
         $Article = $entityManager->getRepository(article::class)->displayAllArticles();
-        //$Turnament = $entityManager->getRepository(Turnament::class)->displayAllArticles();
+        //$Tournament = $entityManager->getRepository(Tournament::class)->displayAllArticles();
         $Theme = $entityManager->getRepository(Theme::class)->getNavBar();
 
         if (!$Theme) {
@@ -435,7 +435,7 @@ class AdminController extends Controller
         return $this->render('/admin/menu/index.html.twig', array(
             "pages" => $Page,
             "articles" => $Article,
-            "turnaments" => null,
+            "tournaments" => null,
             "theme" => $Theme,
             'form' => $form->createView()
         ));

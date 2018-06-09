@@ -6,53 +6,48 @@
 {% endblock %}
 
 {% block contenu %}
-
-    <h1>Bienvenue sur la page {{ page.namePage }}</h1>
-
     <p>
-        {% if page.specialitePage is defined %}
-            <span style="font-weight: bold">Specialité page: </span>
-            {{ page.specialitePage }}
-        {% endif %}
-    <p/>
-
-    <p>
-        {% if page.descriptionPage is defined %}
-            <span style="font-weight: bold">Description page: </span>
-            {{ page.descriptionPage |raw}}
-        {% endif %}
-    </p>
-
-    <p>
-        {% if page.specialitePage == 'liste_article' or page.specialitePage == 'liste_tournois'%}
+        {% if (page.specialitePage is defined and page.specialitePage== 'liste_article') or (page.specialitePage is defined and page.specialitePage == 'liste_tournois') or specialite == 'liste_article'%}
             {% if articles != NULL %}
-                <div class="container">
-                    <div class="row-eq-height">
-                        {% for article in articles %}
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 container-fluid cArticle">
-                                <div class="container-fluid cTitre">
-                                    <div class="col_listeArticle" id="col_titrearticle">
-                                        <h3>{{ article.titre_article|raw }}</h3>
+                 {% if articles|length == 1 %}
+                    {% for article in articles %}
+                        <h3>{{ article.titre_article|raw }}</h3>
+                        {{ article.contenu_article|raw }}
+                    {% endfor %}
+                {% else %}
+                    <div class="container cArticles">
+                        <div class="row-eq-height">
+                            {% for article in articles %}
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 container-fluid cArticle_pos">
+                                    <div class="cArticle">
+                                        <div class="container-fluid cTitre">
+                                            <div class="col_listeArticle" id="col_titrearticle">
+                                                <h3>{{ article.titre_article|raw }}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="container-fluid cContenu">
+                                            <div class="col_listeArticle" id="col_contenuarticle">
+                                                <div class="enSavoirPlus">
+                                                    <button type="button" class="btnLire"><a href='{{ path('mvPageArticleClient', {'P_namePage' : page.namePage ,'idConsult' : article.id }) }}'>En savoir plus</a></button>
+                                                </div>
+                                                {% if article.contenu_article|raw|length > 2500 %}
+                                                    {{ article.contenu_article|striptags|slice(0, 100)|raw }} ...
+                                                {% else %}
+                                                    {{ article.contenu_article|raw }}
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                        <div class="container-fluid cFooter">
+                                            <div class="col_listeArticle" id="col_auteurarticle">{{ article.auteur_article }}</div>
+                                            <div class="col_listeArticle" id="col_datearticle">{{ article.date_article }}</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="container-fluid cContenu">
-                                    <div class="col_listeArticle" id="col_contenuarticle">
-                                        {% if article.contenu_article|raw|length > 2500 %}
-                                            {{ article.contenu_article|striptags|slice(0, 100)|raw }} ...
-                                        {% else %}
-                                            {{ article.contenu_article|raw }}
-                                        {% endif %}
-                                        <button type="button" class="btnLire">En savoir plus</button>
-                                    </div>
-                                </div>
-                                <div class="container-fluid cFooter">
-                                    <div class="col_listeArticle" id="col_auteurarticle">{{ article.auteur_article }}</div>
-                                    <div class="col_listeArticle" id="col_datearticle">{{ article.date_article }}</div>
-                                </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             {% endif %}
         {% endif %}
     </p>
@@ -67,26 +62,22 @@
             $( ".cArticle" ).hover(function() {
                 $(this).css("animation-name", "kfHover");
                 $('.btnLire').css("animation-name", "btnHover");
-                $(this).css("animation-duration", "3s");
-                $(this).css("background-color", "rgba(0, 0, 0,0.5)");
+                $(this).css("animation-duration", "1s");
+                $(this).css("background-color", "rgba(0, 0, 0,0.3)");
 
-                $(this).find('.btnLire').fadeIn(2500);
+                $(this).find('.btnLire').fadeIn(0);
             });
             $( ".cArticle" ).mouseleave(function() {
                 $(this).css("animation-name", "kfLeave");
-                $(this).css("animation-duration", "3s");
+                $(this).css("animation-duration", "1s");
                 $(this).css("background-color", "transparent");
 
-                $(this).find('.btnLire').fadeOut(2500);
+                $(this).find('.btnLire').fadeOut(0);
             });
         });
     </script>
 {% endblock %}
 
 {% block body %}
-
-{% endblock %}
-
-{% block javascripts %}
 
 {% endblock %}

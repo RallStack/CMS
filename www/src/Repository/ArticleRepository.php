@@ -47,7 +47,7 @@ class ArticleRepository extends ServiceEntityRepository
         $sql = '
             SELECT a.id, a.titre_article, a.contenu_article, a.auteur_article, a.date_article, a.publication_article
             FROM article a
-            WHERE (lower(a.titre_article) LIKE lower(:search));
+            WHERE (lower(a.id) LIKE lower(:search));
             ';
         $stmt = $conn->prepare($sql);
         $stmt->execute(['search' => $search]);

@@ -27,15 +27,14 @@ h1.logo > a > span {
 .nav.navbar-nav {
   margin-top: 4px;
   margin-right: 150px;
-  $bgClient: #F5F5F5;
 }
 
 @keyframes kfHover {
   from {background-color: transparent}
-  to {background-color: rgba(0, 0, 0,0.5)}
+  to {background-color: rgba(0, 0, 0,0.3)}
 }
 @keyframes kfLeave {
-  from {background-color: rgba(0, 0, 0,0.5)}
+  from {background-color: rgba(0, 0, 0,0.3)}
   to {background-color: transparent}
 }
 @keyframes btnHover {
@@ -53,37 +52,54 @@ h1.logo > a > span {
 }
 
 html{
-  background-color: $bgClient;
+
 
   .cBody{
-    background-color: $bgClient;
+    color: white;
   }
 
-  .row-eq-height{
-    .cArticle{
-      border: double 1px black;
-      outline: solid 1px black;
-      .cTitre{
-        height:50px;
-        outline: solid 1px black;
-        margin-bottom: 3%;
-      }
-      .cContenu{
-        height:200px;
-        padding-right: 15px;
-        padding-left: 15px;
-
-        span{
-          background-color: transparent !important;
-          color: black;
-        }
-      }
-      .cFooter{
-        #col_auteurarticle{
-          text-align: right;
-        }
-        #col_datearticle{
-          text-align: right;
+  .cArticles{
+    width: 80%;
+    .row-eq-height{
+      .cArticle_pos{
+        .cArticle{
+          width: 95%;
+          border: double 1px white;
+          outline: solid 1px white;
+          .cTitre{
+            height:50px;
+            outline: solid 1px white;
+            margin-bottom: 3%;
+          }
+          .cContenu{
+            height:200px;
+            padding-right: 15px;
+            padding-left: 15px;
+            span{
+              background-color: transparent !important;
+              color: black;
+            }
+            .enSavoirPlus{
+              position: absolute;
+              top: 50%;
+              left: 35%;
+              height: 100px;
+              .btnLire{
+                width: 200%;
+                height: 50%;
+                color: #2A3F54;
+              }
+            }
+          }
+          .cFooter{
+            
+            #col_auteurarticle{
+              text-align: right;
+            }
+            #col_datearticle{
+              text-align: right;
+            }
+          }
         }
       }
     }

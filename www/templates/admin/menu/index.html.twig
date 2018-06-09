@@ -27,7 +27,7 @@
                                 {% for article in articles %}
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" value="{{ article.titre_article|raw }}"> {{ article.titre_article|raw }}
+                                            <input type="checkbox" value="{{ article.id|raw }}" title="{{ article.titre_article|raw }}"> {{ article.titre_article|raw }}
                                         </label>
                                     </div>
                                 {% endfor %}
@@ -91,10 +91,15 @@
             if(type == 'perso'){
                 var url = $('#perso').val();
                 $( ".done-add-menu" ).append( "<li><a href='" + url + "'>" + url + "</a><span class=\"fa fa-trash delete\"></span></li>" );
+            }else if(type == 'article') {
+                var element = "#"+ type +" input:checked";
+                $(element).each(function() {
+                    $( ".done-add-menu" ).append( "<li><a href='/article/" + $(this).val() + "'>" + $(this).attr("title") + "</a><span class=\"fa fa-trash delete\"></span></li>" );
+                });
             }else {
                 var element = "#"+ type +" input:checked";
                 $(element).each(function() {
-                    $( ".done-add-menu" ).append( "<li><a href='" + $(this).val() + "'>" + $(this).val() + "</a><span class=\"fa fa-trash delete\"></span></li>" );
+                    $( ".done-add-menu" ).append( "<li><a href='/" + $(this).val() + "'>" + $(this).val() + "</a><span class=\"fa fa-trash delete\"></span></li>" );
                 });
             }
         }
