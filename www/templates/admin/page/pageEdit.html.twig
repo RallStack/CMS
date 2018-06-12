@@ -1,43 +1,44 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href={{ asset("build/css/admin.css" )}}>
-{% endblock %}
-
 {% block contenu %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
-            <h1>Créer Page</h1>
+            <div id="form-container" class="x_panel tile overflow_hidden" style="min-height: 320px">
+                <h1>Modifier une page</h1>
+                <p>Modifie une page du au site web.</p>
 
-                {{ form_start(form) }}
-                <div class="container">
-                    <div class="row contenu_form" style="text-align: right">
-                        <div class="col-md-2 align_left">
-                            {{ form_label(form.namePage) }}
-                            {{ form_errors(form.namePage) }}
-                            {{ form_widget(form.namePage) }}<br><br>
-
-                            {{ form_label(form.specialitePage) }}
-                            {{ form_errors(form.specialitePage) }}
-                            {{ form_widget(form.specialitePage) }}
-                        </div>
-                        <div class="col-md-10 widget_form" style="text-align: left">
-                            <div class="test" id="container">
-                                {{ form_label(form.descriptionPage) }}
-                                {{ form_errors(form.descriptionPage) }}
-                                {{ form_widget(form.descriptionPage |raw) }}
-                            </div>
-                        </div>
+                {{ form_start(form, {'attr': { 'class': 'form-horizontal form-label-left'}}) }}
+                <div class="form-group">
+                    {{ form_label(form.namePage, 'Nom de la page', { 'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'} }) }}
+                    {{ form_errors(form.namePage) }}
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        {{ form_widget(form.namePage, { 'attr': {'class' : 'form-control col-md-8 col-xs-12'} }) }}
                     </div>
-                    <div class="row validation_form">
-                        <div class="container-fluid col-12 save_form"  style="text-align: center">
-                            {{ form_row(form.submit) }}
-                        </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.specialitePage, 'Spécilité', { 'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'} }) }}
+                    {{ form_errors(form.specialitePage) }}
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        {{ form_widget(form.specialitePage, { 'attr': {'class' : 'form-control col-md-8 col-xs-12'} }) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.descriptionPage, 'Description', { 'label_attr': {'class': 'control-label', 'style': 'float:left; padding-left:10px; padding-bottom:10px;'} }) }}
+                    {{ form_errors(form.descriptionPage) }}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        {{ form_widget(form.descriptionPage) }}
+                    </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-success'}}) }}
                     </div>
                 </div>
                 {{ form_end(form) }}
-
+            </div>
         </div>
     </div>
 {% endblock %}

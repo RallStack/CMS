@@ -1,58 +1,59 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href={{ asset("build/css/admin.css" )}}>
-    <link rel="stylesheet" href={{ asset("build/css/displayContenu.css" )}}>
-{% endblock %}
-
 {% block contenu %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
-            <h1 style="font-size: 36px !important; margin-top: 10px; margin-bottom: 10px;">Liste des articles</h1>
+            <div id="table-container" class="x_panel tile overflow_hidden" style="min-height: 320px">
+                <h1>Liste des articles</h1>
+                <p>Liste tous les articles existant du site web.</p>
 
-            <div class="row-eq-height">
-                <div class="col-xs-2 col_listeArticle titreCol" id="col_titrearticle">Titre</div>
-                <div class="col-xs-5 col_listeArticle titreCol" id="col_contenuarticle">Contenu</div>
-                <div class="col-xs-1 col_listeArticle titreCol" id="col_auteurarticle">Auteur</div>
-                <div class="col-xs-1 col_listeArticle titreCol" id="col_datearticle">Date</div>
-                <div class="col-xs-1 col_listeArticle titreCol" id="col_publicationarticle">Publication</div>
-                <div class="col-xs-1 col_listeArticle titreCol" id="col_editarticle">Editer</div>
-                <div class="col-xs-1 col_listeArticle titreCol" id="col_deletearticle">Supprimer</div>
-                {% for article in articles %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Titre</th>
+                        <th>Contenu</th>
+                        <th>Auteur</th>
+                        <th>Date</th>
+                        <th>Publication</th>
+                        <th style="text-align: center; max-width: 60px;">Éditer</th>
+                        <th style="text-align: center; max-width: 60px;">Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for article in articles %}
+                        <tr>
+                            <th scope="row">{{ article.id }}</th>
+                            <td>
+                                {% if article.titre_article|raw|length > 40 %}
+                                    {{ article.titre_article|striptags|slice(0, 40)|raw }} ...
+                                {% else %}
+                                    {{ article.titre_article|raw }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if article.contenu_article|raw|length > 100 %}
+                                    {{ article.contenu_article|striptags|slice(0, 100)|raw }} ...
+                                {% else %}
+                                    {{ article.contenu_article|raw }}
+                                {% endif %}
+                            </td>
+                            <td>{{ article.auteur_article }}</td>
+                            <td>{{ article.date_article }}</td>
+                            <td>
+                                {% if article.publication_article == 1 %}
+                                    Oui
+                                {% else %}
+                                    Non
+                                {% endif %}
+                            </td>
+                            <td style="text-align: center;"><a class="action" href="{{ path('article_edit', {'id_editArticle' : article.id }) }}"><i class="far fa-edit"></i></a></td>
+                            <td style="text-align: center;"><a class="action" href="{{ path('article_delete', {'id_deleteArticle' : article.id }) }}" onclick="return confirm('Un article va être supprimé. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-                    <div class="col-xs-2 col_listeArticle" id="col_titrearticle">
-                        {% if article.titre_article|raw|length > 40 %}
-                            {{ article.titre_article|striptags|slice(0, 40)|raw }} ...
-                        {% else %}
-                            {{ article.titre_article|raw }}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-5 col_listeArticle" id="col_contenuarticle">
-                        {% if article.contenu_article|raw|length > 100 %}
-                            {{ article.contenu_article|striptags|slice(0, 100)|raw }} ...
-                        {% else %}
-                            {{ article.contenu_article|raw }}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-1 col_listeArticle" id="col_auteurarticle">{{ article.auteur_article }}</div>
-                    <div class="col-xs-1 col_listeArticle" id="col_datearticle">{{ article.date_article }}</div>
-                    <div class="col-xs-1 col_listeArticle" id="col_publicationarticle">
-                        {% if article.publication_article == 1 %}
-                            Oui
-                        {% else %}
-                            Non
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-1 col_listeArticle" id="col_editarticle"><a class="action" href="{{ path('article_edit', {'id_editArticle' : article.id }) }}"><i class="far fa-edit"></i></a></div>
-                    <div class="col-xs-1 col_listeArticle" id="col_deletearticle"><a class="action" href="{{ path('article_delete', {'id_deleteArticle' : article.id }) }}" onclick="return confirm('Un article va être supprimé. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></div>
-
-                    {# Redirection edit and delete
-                        {{ path('article_edit', {'id_edit' : article.id }) }}
-                        {{ path('article_delete', {'id_delete' : article.id }) }}
-                    #}
-
-                {% endfor %}
             </div>
         </div>
     </div>

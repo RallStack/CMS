@@ -313,7 +313,7 @@ class AdminController extends Controller
             )
             ->add('contenuArticle', TextareaType::class, array('attr' => array('class' => 'ckeditor')))
 
-            ->add('submit', SubmitType::class, array('label' => 'Créer Article'))
+            ->add('submit', SubmitType::class, array('label' => 'Modifier l\'article'))
             ->getForm();
 
         $form->handleRequest($request);

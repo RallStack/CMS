@@ -1,45 +1,49 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href={{ asset("build/css/admin.css" )}}>
-    <link rel="stylesheet" href={{ asset("build/css/displayContenu.css" )}}>
-{% endblock %}
-
 {% block contenu %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
-            <h1 style="font-size: 36px !important; margin-top: 10px; margin-bottom: 10px;">Liste des Pages</h1>
+            <div id="table-container" class="x_panel tile overflow_hidden" style="min-height: 320px">
+                <h1>Liste des pages</h1>
+                <p>Liste toutes les pages existant du site web.</p>
 
-            <div class="row-eq-height">
-                <div class="col-xs-2 col_listeArticle titreCol" id="col_namePage">Nom</div>
-                <div class="col-xs-6 col_listeArticle titreCol" id="col_contenuarticle">Description / Contenu</div>
-                <div class="col-xs-2 col_listeArticle titreCol" id="col_specialitePage">Specialité</div>
-                <div class="col-xs-1 col_listeArticle titreCol" id="col_editPage">Editer</div>
-                <div class="col-xs-1 col_listeArticle titreCol" id="col_deletePage">Supprimer</div>
-                {% for page in pages %}
-                    <div class="col-xs-2 col_listePage" id="col_namePage">
-                        {% if page.name_page|raw|length > 40 %}
-                            {{ page.name_page|striptags|slice(0, 40)|raw }} ...
-                        {% else %}
-                            {{ page.name_page|raw }}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-6 col_listePage" id="col_descriptionPage">
-                        {% if page.description_page|raw|length > 100 %}
-                            {{ page.description_page|striptags|slice(0, 100)|raw }} ...
-                        {% else %}
-                            {{ page.description_page|raw }}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-2 col_listePage" id="col_specialitePage">{{ page.specialite_page }}</div>
-                    <div class="col-xs-1 col_listePage" id="col_editPage"><a class="action" href="{{ path('page_edit', {'id_editPage' : page.id }) }}"><i class="far fa-edit"></i></a></div>
-                    <div class="col-xs-1 col_listePage" id="col_deletePage"><a class="action" href="{{ path('page_delete', {'id_deletePage' : page.id }) }}" onclick="return confirm('Une page va être supprimée. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></div>
-                    {# Redirection edit and delete
-                        {{ path('page_edit', {'id_edit' : page.id }) }}
-                        {{ path('page_delete', {'id_delete' : page.id }) }}
-                    #}
-                {% endfor %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Description / Contenu</th>
+                        <th>Specialité</th>
+                        <th style="text-align: center; max-width: 10px;">Éditer</th>
+                        <th style="text-align: center; max-width: 10px;">Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for page in pages %}
+                        <tr>
+                            <th scope="row">{{ page.id }}</th>
+                            <td>
+                                {% if page.name_page|raw|length > 40 %}
+                                    {{ page.name_page|striptags|slice(0, 40)|raw }} ...
+                                {% else %}
+                                    {{ page.name_page|raw }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if page.description_page|raw|length > 100 %}
+                                    {{ page.description_page|striptags|slice(0, 100)|raw }} ...
+                                {% else %}
+                                    {{ page.description_page|raw }}
+                                {% endif %}
+                            </td>
+                            <td>{{ page.specialite_page }}</td>
+                            <td style="text-align: center;"><a class="action" href="{{ path('page_edit', {'id_editPage' : page.id }) }}"><i class="far fa-edit"></i></a></td>
+                            <td style="text-align: center;"><a class="action" href="{{ path('page_delete', {'id_deletePage' : page.id }) }}" onclick="return confirm('Une page va être supprimée. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
