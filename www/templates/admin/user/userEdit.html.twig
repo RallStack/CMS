@@ -1,9 +1,14 @@
 {% extends 'admin/index.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href={{ asset("build/css/admin.css" )}}>
+{% endblock %}
+
 {% block contenu %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
-            <h1>Créer Page</h1>
+            <h1>Modifier un Utilisateur</h1>
 
             {{ form_start(form) }}
             <div class="container">

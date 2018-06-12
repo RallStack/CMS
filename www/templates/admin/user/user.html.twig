@@ -1,10 +1,30 @@
 {% extends 'admin/index.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href={{ asset("build/css/admin.css" )}}>
+    <link rel="stylesheet" href={{ asset("build/css/displayContenu.css" )}}>
+{% endblock %}
+
 {% block contenu %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
-            <h1>Voir User</h1>
+            <h1 style="font-size: 36px !important; margin-top: 10px; margin-bottom: 10px;">Liste des Utilisateurs</h1>
 
+            <div class="row-eq-height">
+                <div class="col-xs-3 col_listeArticle titreCol" id="col_username">Username</div>
+                <div class="col-xs-3 col_listeArticle titreCol" id="col_email">Email</div>
+                <div class="col-xs-1 col_listeArticle titreCol" id="col_editPage">Editer</div>
+                <div class="col-xs-1 col_listeArticle titreCol" id="col_deletePage">Supprimer</div>
+                <div class="col-xs-4"></div>
+                {% for user in users %}
+                    <div class="col-xs-3 col_listePage" id="col_username">{{ user.username }}</div>
+                    <div class="col-xs-3 col_listePage" id="col_email">{{ user.email }}</div>
+                    <div class="col-xs-1 col_listePage" id="col_editPage"><a class="action" href="{{ path('user_edit', {'id_editUser' : user.id }) }}"><i class="far fa-edit"></i></a></div>
+                    <div class="col-xs-1 col_listePage" id="col_deletePage"><a class="action" href="{{ path('user_delete', {'id_deleteUser' : user.id }) }}" onclick="return confirm('Un utilisateur va être supprimée. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></div>
+                    <div class="col-xs-4"></div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

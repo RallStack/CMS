@@ -10,9 +10,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Theme;
+use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -443,19 +445,149 @@ class AdminController extends Controller
 
     /* Routing Section User */
 
+
     /**
-     * @Route("/admin/user")
+     * @Route("/admin/user", name="user")
      */
     public function user()
     {
-        return $this->render('/admin/user/user.html.twig');
+        $displayAllUsers = $this->getDoctrine()->getRepository(User::class)->displayAllUsers();
+
+        return $this->render('/admin/user/user.html.twig', array(
+            "users" => $displayAllUsers
+        ));
     }
 
     /**
      * @Route("/admin/user/create")
      */
-    public function userCreate()
+    public function userCreate(Request $request)
     {
-        return $this->render('/admin/user/userCreate.html.twig');
+        $user = new User();
+
+        $form = $this->createFormBuilder($user)
+            ->add('username', TextType::class, array('label' => 'Nom d\'utilisateur'))
+            ->add('email', TextType::class, array('label' => 'email'))
+            ->add('password', PasswordType::class, array('label' => 'Mot de passe'))
+            ->add('submit', SubmitType::class, array('label' => 'Créer un utilisateur'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $username = $form->get('username')->getData();
+            $email = $form->get('email')->getData();
+            $password = $form->get('password')->getData();
+
+            $insertNewUser = $this->getDoctrine()->getManager();
+
+            $user->setUsername($username);
+            $user->setEmail($email);
+            $user->setPassword($password);
+
+            // Sauvergarde de la page
+            $insertNewUser->persist($user);
+
+            // Exécution requete - Insertion des données de la page en base
+            $insertNewUser->flush();
+
+            return $this->redirectToRoute('user');
+
+        }
+
+        return $this->render('/admin/user/userCreate.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/admin/user/edit/{id_editUser}", name="user_edit")
+     */
+    public function userEdit($id_editUser, Request $request)
+    {
+
+        // you can fetch the EntityManager via $this->getDoctrine()
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(['id' => $id_editUser]);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'Pas d\'utilisateur trouvé'
+            );
+        }
+        $id = $user->getId();
+        $username = $user->getUsername();
+        $email = $user->getEmail();
+        $password = $user->getPassword();
+
+
+        $form = $this->createFormBuilder($user)
+            ->add('username', TextType::class, array('label' => 'Nom d\'utilisateur'))
+            ->add('email', TextType::class, array('label' => 'email'))
+            ->add('password', PasswordType::class, array('label' => 'Mot de passe'))
+            ->add('submit', SubmitType::class, array('label' => 'Modifier un utilisateur'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $form_username = $form->get('username')->getData();
+            $form_email = $form->get('email')->getData();
+            $form_password = $form->get('password')->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $user->setUsername($form_username);
+            $user->setEmail($form_email);
+            $user->setPassword($form_password);
+
+            // Sauvergarde du produit
+            $em->persist($user);
+
+            // Exécution requete
+            $em->flush();
+
+            $displayAllUsers = $this->getDoctrine()->getRepository(User::class)->displayAllUsers();
+            // just setup a fresh $task object (remove the dummy data)
+            return $this->render('/admin/user/user.html.twig', array(
+                "users" => $displayAllUsers
+            ));
+        }
+
+        return $this->render('/admin/user/userEdit.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/admin/user/delete/{id_deleteUser}", name="user_delete")
+     */
+    public function userDelete($id_deleteUser, Request $request)
+    {
+        // you can fetch the EntityManager via $this->getDoctrine()
+
+        $em = $this->getDoctrine()->getManager();
+        $recupUserDelete = $em->getRepository(User::class)->findOneBy(['id' => $id_deleteUser]);
+
+        if (!$recupUserDelete) {
+            throw $this->createNotFoundException(
+                'Pas d\'utilisateur trouvé'
+            );
+        }
+
+        $em->remove($recupUserDelete);
+        $em->flush();
+
+        $displayAllUsers = $this->getDoctrine()->getRepository(User::class)->displayAllUsers();
+
+        return $this->render('/admin/user/user.html.twig', array(
+            "users" => $displayAllUsers
+        ));
     }
 }

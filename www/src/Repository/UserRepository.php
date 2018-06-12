@@ -19,6 +19,26 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    /**
+     * @return Page[]
+     */
+    public function displayAllUsers(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $querySelectAllUser = '
+            SELECT id, username, email FROM user
+            ';
+
+        $reqSelectAllUser = $conn->prepare($querySelectAllUser);
+        $reqSelectAllUser->execute();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $reqSelectAllUser->fetchAll();
+    }
+
+
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
