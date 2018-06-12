@@ -3,28 +3,39 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href={{ asset("build/css/admin.css" )}}>
-    <link rel="stylesheet" href={{ asset("build/css/displayContenu.css" )}}>
 {% endblock %}
 
 {% block contenu %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
-            <h1 style="font-size: 36px !important; margin-top: 10px; margin-bottom: 10px;">Liste des Utilisateurs</h1>
+                <div id="table-container" class="x_panel tile overflow_hidden" style="min-height: 320px">
+                    <h1>Liste des utilisateurs</h1>
+                    <p>Liste tous les utilisateurs existant du site web.</p>
 
-            <div class="row-eq-height">
-                <div class="col-xs-3 col_listeArticle titreCol" id="col_username">Username</div>
-                <div class="col-xs-3 col_listeArticle titreCol" id="col_email">Email</div>
-                <div class="col-xs-1 col_listeArticle titreCol" id="col_editPage">Editer</div>
-                <div class="col-xs-1 col_listeArticle titreCol" id="col_deletePage">Supprimer</div>
-                <div class="col-xs-4"></div>
-                {% for user in users %}
-                    <div class="col-xs-3 col_listePage" id="col_username">{{ user.username }}</div>
-                    <div class="col-xs-3 col_listePage" id="col_email">{{ user.email }}</div>
-                    <div class="col-xs-1 col_listePage" id="col_editPage"><a class="action" href="{{ path('user_edit', {'id_editUser' : user.id }) }}"><i class="far fa-edit"></i></a></div>
-                    <div class="col-xs-1 col_listePage" id="col_deletePage"><a class="action" href="{{ path('user_delete', {'id_deleteUser' : user.id }) }}" onclick="return confirm('Un utilisateur va être supprimée. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></div>
-                    <div class="col-xs-4"></div>
-                {% endfor %}
-            </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th style="text-align: center; max-width: 10px;">Éditer</th>
+                                <th style="text-align: center; max-width: 10px;">Supprimer</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <th scope="row">{{ user.id }}</th>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td style="text-align: center;"><a class="action" href="{{ path('user_edit', {'id_editUser' : user.id }) }}"><i class="far fa-edit"></i></a></td>
+                                    <td style="text-align: center;"><a class="action" href="{{ path('user_delete', {'id_deleteUser' : user.id }) }}" onclick="return confirm('Un utilisateur va être supprimée. Voulez-vous continuer ?')"><i class="fas fa-trash-alt"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                </div>
         </div>
     </div>
 {% endblock %}

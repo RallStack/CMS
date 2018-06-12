@@ -8,35 +8,42 @@
 {% block contenu %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 90vh;">
-            <h1>Modifier un Utilisateur</h1>
+            <div id="form-container" class="x_panel tile overflow_hidden" style="min-height: 320px">
+                <h1>Modifier un utilisateur</h1>
+                <p>Modifie un utilisateur existant du site web.</p>
 
-            {{ form_start(form) }}
-            <div class="container">
-                <div class="row contenu_form" style="text-align: right">
-                    <div class="col-md-2 align_left">
-                        {{ form_label(form.username) }}
-                        {{ form_errors(form.username) }}
-                        {{ form_widget(form.username) }}<br><br>
-
-                        {{ form_label(form.email) }}
-                        {{ form_errors(form.email) }}
-                        {{ form_widget(form.email) }}
-                    </div>
-                    <div class="col-md-10 widget_form" style="text-align: left">
-                        <div class="test" id="container">
-                            {{ form_label(form.password) }}
-                            {{ form_errors(form.password) }}
-                            {{ form_widget(form.password |raw) }}
-                        </div>
+                {{ form_start(form, {'attr': { 'class': 'form-horizontal form-label-left'}}) }}
+                <div class="form-group">
+                    {{ form_label(form.username, 'Nom d\'utilisateur', { 'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'} }) }}
+                    {{ form_errors(form.username) }}
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        {{ form_widget(form.username, { 'attr': {'class' : 'form-control col-md-8 col-xs-12'} }) }}
                     </div>
                 </div>
-                <div class="row validation_form">
-                    <div class="container-fluid col-12 save_form"  style="text-align: center">
-                        {{ form_row(form.submit) }}
+
+                <div class="form-group">
+                    {{ form_label(form.email, 'Email', { 'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'} }) }}
+                    {{ form_errors(form.email) }}
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        {{ form_widget(form.email, { 'attr': {'class' : 'form-control col-md-8 col-xs-12'} }) }}
                     </div>
                 </div>
+
+                <div class="form-group">
+                    {{ form_label(form.password, 'Mot de passe', { 'label_attr': {'class': 'control-label col-md-2 col-sm-2 col-xs-12'} }) }}
+                    {{ form_errors(form.password) }}
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        {{ form_widget(form.password, { 'attr': {'class' : 'form-control col-md-8 col-xs-12'} }) }}
+                    </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-success'}}) }}
+                    </div>
+                </div>
+                {{ form_end(form) }}
             </div>
-            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

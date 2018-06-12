@@ -28,7 +28,7 @@ $bg : #eeeeee;
 }
 
 [name="form"]{
-  margin-top: 5%;
+  margin-top: 30px;
 }
 
 [for="form_descriptionPage"]{
@@ -39,12 +39,12 @@ $bg : #eeeeee;
   text-align: left;
 }
 
-[name="form[submit]"]{
+/*[name="form[submit]"]{
   margin-top: 5%;
   margin-left: 50%;
   width: 20%;
   height: 50px;
-}
+}*/
 
 .side-add-menu > li {
   position: relative;
@@ -110,4 +110,16 @@ $bg : #eeeeee;
 .panel_toolbox {
   float: right;
   min-width: inherit;
+}
+
+#form-container input{
+  background-color: #f3f3f3;
+}
+
+#form-container label.control-label{
+  text-align: left;
+}
+
+#table-container table{
+  margin-top: 30px;
 }
