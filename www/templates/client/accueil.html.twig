@@ -1,7 +1,59 @@
 {% extends 'client/base.html.twig' %}
 
-{% block title %}client{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href={{ asset("build/css/client.css" )}}>
+{% endblock %}
+
+{% block contenu %}
+    {% if (page.specialitePage is defined and page.specialitePage== 'accueil') or (page.specialitePage is defined and page.specialitePage == 'accueil') or (specialite is defined and specialite == 'accueil') %}
+        <div class="container">
+            <div class="row-eq-height">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container-fluid">
+                    <div class="cPage">
+                        <div class="row-eq-height">
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                <div class="col_listeArticle" id="col_titrearticle">
+                                    <h1 class="namePage">{{ page.namePage }}</h1>
+                                    {{ page.descriptionPage |raw}}
+                                </div>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            // A l'initialisation de la page
+            $('.btnLire').css("display", "none");
+
+            $( ".cArticle" ).hover(function() {
+                $(this).css("animation-name", "kfHover");
+                $('.btnLire').css("animation-name", "btnHover");
+                $(this).css("animation-duration", "1s");
+                $(this).css("background-color", "rgba(0, 0, 0,0.3)");
+
+                $(this).find('.btnLire').fadeIn(0);
+            });
+            $( ".cArticle" ).mouseleave(function() {
+                $(this).css("animation-name", "kfLeave");
+                $(this).css("animation-duration", "1s");
+                $(this).css("background-color", "transparent");
+
+                $(this).find('.btnLire').fadeOut(0);
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
 
 {% endblock %}
+

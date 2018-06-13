@@ -25,14 +25,14 @@
                         {% if article.titre_article|raw|length > 40 %}
                             {{ article.titre_article|striptags|slice(0, 40)|raw }} ...
                         {% else %}
-                            {{ article.titre_article|raw }}
+                            {{ article.titre_article|striptags|raw }}
                         {% endif %}
                     </div>
                     <div class="col-xs-5 col_listeArticle" id="col_contenuarticle">
                         {% if article.contenu_article|raw|length > 100 %}
                             {{ article.contenu_article|striptags|slice(0, 100)|raw }} ...
                         {% else %}
-                            {{ article.contenu_article|raw }}
+                            {{ article.contenu_article|striptags|raw }}
                         {% endif %}
                     </div>
                     <div class="col-xs-1 col_listeArticle" id="col_auteurarticle">{{ article.auteur_article }}</div>

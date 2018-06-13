@@ -28,6 +28,7 @@ class PageRepository extends ServiceEntityRepository
 
         $querySelectAllPage = '
             SELECT id, name_page, specialite_page, description_page FROM page
+            ORDER BY specialite_page ASC;
             ';
         $reqSelectAllPage = $conn->prepare($querySelectAllPage);
         $reqSelectAllPage->execute();
@@ -48,6 +49,7 @@ class PageRepository extends ServiceEntityRepository
             SELECT p.id, p.name_page, p.description_page, p.specialite_page
             FROM page p
             WHERE (lower(p.name_page) LIKE lower(:search));
+            ORDER BY specialite_page ASC;
             ';
         $stmt = $conn->prepare($sql);
         $stmt->execute(['search' => $search]);

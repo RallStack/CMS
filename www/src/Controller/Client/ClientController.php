@@ -27,7 +27,20 @@ class ClientController extends Controller
      */
     public function indexClient()
     {
-        return $this->render('/client/accueil.html.twig');
+        $recupAllPage = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['specialitePage' => 'accueil']);
+
+
+        if (!$recupAllPage) {
+            return new Response(
+                '<html><body>Page non trouvée</body></html>'
+            );
+        }
+        else{
+
+            return $this->render('/client/accueil.html.twig', array(
+                'page' => $recupAllPage
+            ));
+        }
     }
 
     /**

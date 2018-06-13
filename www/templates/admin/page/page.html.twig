@@ -22,14 +22,14 @@
                         {% if page.name_page|raw|length > 40 %}
                             {{ page.name_page|striptags|slice(0, 40)|raw }} ...
                         {% else %}
-                            {{ page.name_page|raw }}
+                            {{ page.name_page|striptags|raw }}
                         {% endif %}
                     </div>
                     <div class="col-xs-6 col_listePage" id="col_descriptionPage">
                         {% if page.description_page|raw|length > 100 %}
                             {{ page.description_page|striptags|slice(0, 100)|raw }} ...
                         {% else %}
-                            {{ page.description_page|raw }}
+                            {{ page.description_page|striptags|raw }}
                         {% endif %}
                     </div>
                     <div class="col-xs-2 col_listePage" id="col_specialitePage">{{ page.specialite_page }}</div>

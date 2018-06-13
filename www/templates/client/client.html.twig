@@ -7,12 +7,28 @@
 
 {% block contenu %}
     <p>
-        {% if (page.specialitePage is defined and page.specialitePage== 'liste_article') or (page.specialitePage is defined and page.specialitePage == 'liste_tournois') or specialite == 'liste_article'%}
+        {% if (page.specialitePage is defined and page.specialitePage== 'liste_article') or (page.specialitePage is defined and page.specialitePage == 'liste_tournois') or (specialite is defined and specialite == 'liste_article') %}
             {% if articles != NULL %}
                  {% if articles|length == 1 %}
                     {% for article in articles %}
-                        <h3>{{ article.titre_article|raw }}</h3>
-                        {{ article.contenu_article|raw }}
+                        <div class="container">
+                            <div class="row-eq-height">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container-fluid">
+                                    <div class="cPage">
+                                        <div class="row-eq-height">
+                                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                                <div class="col_listeArticle" id="col_titrearticle">
+                                                    <h1 class="titreArticle">{{ article.titre_article|raw }}</h1>
+                                                    {{ article.contenu_article|raw }}
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     {% endfor %}
                 {% else %}
                     <div class="container cArticles">
@@ -50,10 +66,29 @@
                 {% endif %}
             {% endif %}
         {% endif %}
-    </p>
+        {% if (page.specialitePage is defined and page.specialitePage== 'page_vierge') or (page.specialitePage is defined and page.specialitePage == 'page_vierge') or (specialite is defined and specialite == 'page_vierge') %}
+            <div class="container">
+                <div class="row-eq-height">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container-fluid">
+                        <div class="cPage">
+                            <div class="row-eq-height">
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                    <div class="col_listeArticle" id="col_titrearticle">
+                                        <h1 class="namePage">{{ page.namePage }}</h1>
+                                        {{ page.descriptionPage |raw}}
+                                    </div>
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+</p>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
     <script type="text/javascript">
         $( document ).ready(function() {
             // A l'initialisation de la page

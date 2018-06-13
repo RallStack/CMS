@@ -62,6 +62,7 @@ html{
     width: 80%;
     .row-eq-height{
       .cArticle_pos{
+        padding-bottom: 10px;
         .cArticle{
           width: 95%;
           border: double 1px white;
@@ -104,4 +105,14 @@ html{
       }
     }
   }
+}
+
+.titreArticle{
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.namePage{
+  text-align: center;
+  padding-bottom: 40px;
 }
