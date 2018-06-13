@@ -28,14 +28,14 @@
                                 {% if article.titre_article|raw|length > 40 %}
                                     {{ article.titre_article|striptags|slice(0, 40)|raw }} ...
                                 {% else %}
-                                    {{ article.titre_article|raw }}
+                                    {{ article.titre_article|striptags|raw }}
                                 {% endif %}
                             </td>
                             <td>
                                 {% if article.contenu_article|raw|length > 100 %}
                                     {{ article.contenu_article|striptags|slice(0, 100)|raw }} ...
                                 {% else %}
-                                    {{ article.contenu_article|raw }}
+                                    {{ article.contenu_article|striptags|raw }}
                                 {% endif %}
                             </td>
                             <td>{{ article.auteur_article }}</td>

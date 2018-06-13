@@ -75,6 +75,7 @@ class AdminController extends Controller
                         'Page tournois' => 'liste_tournois',
                         'Page articles' => 'liste_article',
                         'Page vierge' => 'page_vierge',
+                        'Page d\'accueil' => 'accueil'
                     )
                 )
             )
@@ -143,6 +144,7 @@ class AdminController extends Controller
                         'Page tournois' => 'liste_tournois',
                         'Page articles' => 'liste_article',
                         'Page vierge' => 'page_vierge',
+                        'Page d\'accueil' => 'accueil'
                     )
                 )
             )

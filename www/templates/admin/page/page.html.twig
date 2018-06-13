@@ -26,14 +26,14 @@
                                 {% if page.name_page|raw|length > 40 %}
                                     {{ page.name_page|striptags|slice(0, 40)|raw }} ...
                                 {% else %}
-                                    {{ page.name_page|raw }}
+                                    {{ page.name_page|striptags|raw }}
                                 {% endif %}
                             </td>
                             <td>
                                 {% if page.description_page|raw|length > 100 %}
                                     {{ page.description_page|striptags|slice(0, 100)|raw }} ...
                                 {% else %}
-                                    {{ page.description_page|raw }}
+                                    {{ page.description_page|striptags|raw }}
                                 {% endif %}
                             </td>
                             <td>{{ page.specialite_page }}</td>
